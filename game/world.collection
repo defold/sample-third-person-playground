@@ -1417,7 +1417,7 @@ embedded_instances {
   "  material: \\\"/shadow_mapping/materials/high/diffuse_transparent.material\\\"\\n"
   "  textures {\\n"
   "    sampler: \\\"tex0\\\"\\n"
-  "    texture: \\\"/assets/images/white.png\\\"\\n"
+  "    texture: \\\"/assets/images/alpha.png\\\"\\n"
   "  }\\n"
   "}\\n"
   "create_go_bones: false\\n"
