@@ -1,0 +1,11 @@
+mesh: "/assets/models/forest/sources/Rock_3_R_Color1.glb"
+name: "rock_1"
+materials {
+  name: "forest.015"
+  material: "/shadow_mapping/materials/high/diffuse.material"
+  textures {
+    sampler: "tex0"
+    texture: "/assets/models/forest/forest_texture.png"
+  }
+}
+create_go_bones: false

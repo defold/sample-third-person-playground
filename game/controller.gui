@@ -1,0 +1,74 @@
+script: "/game/controller.gui_script"
+textures {
+  name: "game"
+  texture: "/assets/game.atlas"
+}
+nodes {
+  position {
+    x: 852.0
+    y: 320.0
+  }
+  size {
+    x: 568.0
+    y: 640.0
+  }
+  type: TYPE_BOX
+  texture: "game/alpha"
+  id: "joystick_area"
+  xanchor: XANCHOR_RIGHT
+  yanchor: YANCHOR_BOTTOM
+  layer: "img"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 803.0
+    y: 336.0
+  }
+  size {
+    x: 250.0
+    y: 250.0
+  }
+  color {
+    x: 0.6
+    y: 0.702
+  }
+  type: TYPE_BOX
+  texture: "game/cicle"
+  id: "joystick_back"
+  xanchor: XANCHOR_RIGHT
+  yanchor: YANCHOR_BOTTOM
+  layer: "img"
+  inherit_alpha: true
+  alpha: 0.3
+}
+nodes {
+  position {
+    x: 803.0
+    y: 336.0
+  }
+  size {
+    x: 100.0
+    y: 100.0
+  }
+  color {
+    x: 0.6
+    y: 0.702
+  }
+  type: TYPE_BOX
+  texture: "game/cicle"
+  id: "joystick_move"
+  xanchor: XANCHOR_RIGHT
+  yanchor: YANCHOR_BOTTOM
+  layer: "img"
+  inherit_alpha: true
+  alpha: 0.75
+}
+layers {
+  name: "img"
+}
+layers {
+  name: "txt"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

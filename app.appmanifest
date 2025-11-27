@@ -1,0 +1,111 @@
+platforms:
+  armv7-ios:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      frameworks: []
+      linkFlags: []
+  arm64-ios:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      frameworks: []
+      linkFlags: []
+  x86_64-ios:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      frameworks: []
+      linkFlags: []
+  armv7-android:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeJars: []
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      linkFlags: []
+      jetifier: true
+  arm64-android:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeJars: []
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      linkFlags: []
+      jetifier: true
+  arm64-osx:
+    context:
+      excludeLibs: [image, liveupdate, graphics_vulkan, platform_vulkan, MoltenVK]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt, GraphicsAdapterVulkan]
+      symbols: [GraphicsAdapterOpenGL]
+      libs: [image_null, liveupdate_null, graphics, platform]
+      frameworks: [OpenGL]
+      linkFlags: []
+  x86_64-osx:
+    context:
+      excludeLibs: [image, liveupdate, graphics_vulkan, platform_vulkan, MoltenVK]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt, GraphicsAdapterVulkan]
+      symbols: [GraphicsAdapterOpenGL]
+      libs: [image_null, liveupdate_null, graphics, platform]
+      frameworks: [OpenGL]
+      linkFlags: []
+  x86_64-linux:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      linkFlags: []
+  arm64-linux:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      linkFlags: []
+  x86-win32:
+    context:
+      excludeLibs: [libimage, libliveupdate]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [libimage_null.lib, libliveupdate_null.lib]
+      linkFlags: []
+  x86_64-win32:
+    context:
+      excludeLibs: [libimage, libliveupdate]
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [libimage_null.lib, libliveupdate_null.lib]
+      linkFlags: []
+  js-web:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeJsLibs: []
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      linkFlags: []
+  wasm-web:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeJsLibs: []
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      linkFlags: []
+  wasm_pthread-web:
+    context:
+      excludeLibs: [image, liveupdate]
+      excludeJsLibs: []
+      excludeSymbols: [ScriptTypesExt, ScriptImageExt]
+      symbols: []
+      libs: [image_null, liveupdate_null]
+      linkFlags: []

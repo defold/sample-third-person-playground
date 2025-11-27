@@ -1,0 +1,8 @@
+name: "shadow"
+tags: "shadow"
+vertex_program: "/shadow_mapping/materials/high/shadow.vp"
+fragment_program: "/shadow_mapping/materials/high/shadow.fp"
+vertex_constants {
+  name: "mtx_worldviewproj"
+  type: CONSTANT_TYPE_WORLDVIEWPROJ
+}

@@ -1,0 +1,53 @@
+components {
+  id: "model_tiers"
+  component: "/shadow_mapping/model_tiers.script"
+}
+embedded_components {
+  id: "model"
+  type: "model"
+  data: "mesh: \"/assets/models/forest/sources/Fuel_C_Barrel.gltf\"\n"
+  "skeleton: \"/assets/models/forest/sources/Fuel_C_Barrel.gltf\"\n"
+  "name: \"{{NAME}}\"\n"
+  "materials {\n"
+  "  name: \"resource\"\n"
+  "  material: \"/shadow_mapping/materials/high/diffuse.material\"\n"
+  "  textures {\n"
+  "    sampler: \"tex0\"\n"
+  "    texture: \"/assets/models/forest/resource_texture.png\"\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    y: -0.5
+  }
+}
+embedded_components {
+  id: "collisionobject"
+  type: "collisionobject"
+  data: "type: COLLISION_OBJECT_TYPE_DYNAMIC\n"
+  "mass: 5.0\n"
+  "friction: 0.9\n"
+  "restitution: 0.5\n"
+  "group: \"ball\"\n"
+  "mask: \"player\"\n"
+  "mask: \"ground\"\n"
+  "mask: \"ball\"\n"
+  "mask: \"env\"\n"
+  "embedded_collision_shape {\n"
+  "  shapes {\n"
+  "    shape_type: TYPE_BOX\n"
+  "    position {\n"
+  "    }\n"
+  "    rotation {\n"
+  "    }\n"
+  "    index: 0\n"
+  "    count: 3\n"
+  "  }\n"
+  "  data: 0.3735\n"
+  "  data: 0.5\n"
+  "  data: 0.372039\n"
+  "}\n"
+  "linear_damping: 0.8\n"
+  "angular_damping: 0.5\n"
+  ""
+}

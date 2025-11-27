@@ -1,0 +1,4 @@
+image: "/assets/tilemap/surface_tilesheet.png"
+tile_width: 64
+tile_height: 64
+extrude_borders: 2

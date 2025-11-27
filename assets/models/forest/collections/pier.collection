@@ -1,0 +1,322 @@
+name: "pier"
+instances {
+  id: "wall"
+  prototype: "/assets/models/forest/gameobjects/wall.go"
+  position {
+    x: 399.0
+    z: 38.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "wall2"
+  prototype: "/assets/models/forest/gameobjects/wall.go"
+  position {
+    x: 53.0
+    z: 394.0
+  }
+  rotation {
+    y: -0.7126409
+    w: 0.701529
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "wall1"
+  prototype: "/assets/models/forest/gameobjects/wall.go"
+  position {
+    x: 53.0
+    z: -311.0
+  }
+  rotation {
+    y: -0.7126409
+    w: 0.701529
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "pallet1"
+  data: "components {\n"
+  "  id: \"model_tiers\"\n"
+  "  component: \"/shadow_mapping/model_tiers.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "skeleton: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "name: \\\"{{NAME}}\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"resource\\\"\\n"
+  "  material: \\\"/shadow_mapping/materials/high/diffuse.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"tex0\\\"\\n"
+  "    texture: \\\"/assets/models/forest/resource_texture.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: -116.0
+    y: 11.0
+    z: 188.0
+  }
+  rotation {
+    y: -1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+embedded_instances {
+  id: "pallet2"
+  data: "components {\n"
+  "  id: \"model_tiers\"\n"
+  "  component: \"/shadow_mapping/model_tiers.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "skeleton: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "name: \\\"{{NAME}}\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"resource\\\"\\n"
+  "  material: \\\"/shadow_mapping/materials/high/diffuse.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"tex0\\\"\\n"
+  "    texture: \\\"/assets/models/forest/resource_texture.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 183.0
+    y: 11.0
+    z: 188.0
+  }
+  rotation {
+    y: -1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+embedded_instances {
+  id: "pallet4"
+  data: "components {\n"
+  "  id: \"model_tiers\"\n"
+  "  component: \"/shadow_mapping/model_tiers.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "skeleton: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "name: \\\"{{NAME}}\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"resource\\\"\\n"
+  "  material: \\\"/shadow_mapping/materials/high/diffuse.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"tex0\\\"\\n"
+  "    texture: \\\"/assets/models/forest/resource_texture.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: -312.0
+    z: -101.0
+  }
+  rotation {
+    z: 0.19936794
+    w: 0.9799247
+  }
+  scale3 {
+    x: 100.0
+    y: 200.0
+    z: 200.0
+  }
+}
+embedded_instances {
+  id: "pallet5"
+  data: "components {\n"
+  "  id: \"model_tiers\"\n"
+  "  component: \"/shadow_mapping/model_tiers.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "skeleton: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "name: \\\"{{NAME}}\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"resource\\\"\\n"
+  "  material: \\\"/shadow_mapping/materials/high/diffuse.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"tex0\\\"\\n"
+  "    texture: \\\"/assets/models/forest/resource_texture.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: -312.0
+    z: 188.0
+  }
+  rotation {
+    z: 0.19936794
+    w: 0.9799247
+  }
+  scale3 {
+    x: 100.0
+    y: 200.0
+    z: 200.0
+  }
+}
+embedded_instances {
+  id: "pallet3"
+  data: "components {\n"
+  "  id: \"model_tiers\"\n"
+  "  component: \"/shadow_mapping/model_tiers.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "skeleton: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "name: \\\"{{NAME}}\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"resource\\\"\\n"
+  "  material: \\\"/shadow_mapping/materials/high/diffuse.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"tex0\\\"\\n"
+  "    texture: \\\"/assets/models/forest/resource_texture.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 187.0
+    y: 11.0
+    z: -114.0
+  }
+  rotation {
+    y: -1.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+embedded_instances {
+  id: "pallet"
+  data: "components {\n"
+  "  id: \"model_tiers\"\n"
+  "  component: \"/shadow_mapping/model_tiers.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "skeleton: \\\"/assets/models/forest/sources/Pallet_Wood.gltf\\\"\\n"
+  "name: \\\"{{NAME}}\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"resource\\\"\\n"
+  "  material: \\\"/shadow_mapping/materials/high/diffuse.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"tex0\\\"\\n"
+  "    texture: \\\"/assets/models/forest/resource_texture.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: -116.0
+    y: 11.0
+    z: -111.0
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+embedded_instances {
+  id: "collider"
+  data: "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"env\\\"\\n"
+  "mask: \\\"ball\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: 33.96\\n"
+  "      y: 20.99\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: -310.0\\n"
+  "      y: -6.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "      z: 0.2332732\\n"
+  "      w: 0.9724113\\n"
+  "    }\\n"
+  "    index: 3\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 305.0\\n"
+  "  data: 50.0\\n"
+  "  data: 295.0\\n"
+  "  data: 70.0\\n"
+  "  data: 50.0\\n"
+  "  data: 295.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    z: 39.0
+  }
+}

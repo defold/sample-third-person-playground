@@ -1,0 +1,38 @@
+name: "game"
+collection_instances {
+  id: "player"
+  collection: "/game/player.collection"
+  rotation {
+    y: -0.26723838
+    w: 0.96363044
+  }
+}
+collection_instances {
+  id: "world"
+  collection: "/game/world.collection"
+}
+scale_along_z: 0
+embedded_instances {
+  id: "game"
+  data: "components {\n"
+  "  id: \"shadows\"\n"
+  "  component: \"/game/shadows.script\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "controller"
+  data: "components {\n"
+  "  id: \"gui\"\n"
+  "  component: \"/game/controller.gui\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "tier_service"
+  data: "components {\n"
+  "  id: \"tier_service\"\n"
+  "  component: \"/shadow_mapping/tier_service.script\"\n"
+  "}\n"
+  ""
+}

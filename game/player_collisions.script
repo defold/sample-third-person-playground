@@ -1,0 +1,66 @@
+local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
+local MSG_TRIGGER_RESPONSE = hash("trigger_response")
+
+local GROUP_GOLD = hash("gold")
+local GROUP_GOLD_TARGET = hash("gold_target")
+
+function init(self)
+    ---Get hand bone from a model
+    self.url_hand = model.get_go("/player/character_model#model", "DEF-handL")
+    self.gold_release_position = go.get_position("/world/gold_release_position")
+    self.bars = {}
+end
+
+function on_message(self, message_id, message, sender)
+    -- Handle collision
+    if message_id == MSG_CONTACT_POINT_RESPONSE then
+        if message.other_group == GROUP_GOLD then
+            ---If we already added bar to the stack then we skip code
+            for key, bar in pairs(self.bars) do
+                if bar.go_id == message.other_id then
+                    return
+                end
+            end
+            local bar_body = msg.url(nil, message.other_id, "collisionobject")
+            ---Attach the bar to the bone
+            go.set_parent(message.other_id, self.url_hand, true)
+            ---Disable the bar body
+            msg.post(bar_body, "disable")
+            ---Move the bar to a new position
+            local stack_position = vmath.vector3(0, - #self.bars * 0.2, 0)
+            go.animate(message.other_id, "position", go.PLAYBACK_ONCE_FORWARD, stack_position, go.EASING_OUTSINE, 0.5)
+            go.animate(message.other_id, "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(math.rad(180)),
+                go.EASING_OUTSINE, 0.5)
+            ---Collect the gold bar to a table
+            self.bars[#self.bars + 1] = {
+                body_id = bar_body,
+                go_id = message.other_id
+            }
+        end
+    elseif message_id == MSG_TRIGGER_RESPONSE then
+        if message.other_group == GROUP_GOLD_TARGET then
+            if message.enter and #self.bars > 0 then
+                ---Start a timer to remove gold bars
+                ---This can also be done in the update function
+                self.remove_timer = timer.delay(0.3, true, function()
+                    if #self.bars > 0 then
+                        ---Remove a gold bar from the model
+                        local bar = table.remove(self.bars)
+                        go.set_parent(bar.go_id, nil, true)
+                        ---Move the gold bar to the gold release position
+                        go.animate(bar.go_id, "position", go.PLAYBACK_ONCE_FORWARD, self.gold_release_position,
+                            go.EASING_OUTSINE, 0.2, 0, function()
+                                ---Enable the body of the gold bar.
+                                go.set_position(self.gold_release_position, bar.body_id)
+                                msg.post(bar.body_id, "enable")
+                            end)
+                    end
+                end)
+            elseif self.remove_timer then
+                ---On exit cancel a timer
+                timer.cancel(self.remove_timer)
+                self.remove_timer = nil
+            end
+        end
+    end
+end

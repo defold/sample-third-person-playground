@@ -1,0 +1,11 @@
+mesh: "/assets/models/forest/sources/Grass_1_C_Color1.glb"
+skeleton: "/assets/models/forest/sources/Grass_1_C_Color1.glb"
+name: "tree_4_b_color1"
+materials {
+  name: "forest.004"
+  material: "/shadow_mapping/materials/high/diffuse.material"
+  textures {
+    sampler: "tex0"
+    texture: "/assets/models/forest/forest_texture.png"
+  }
+}
