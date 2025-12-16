@@ -1,0 +1,23 @@
+local tiers = require("shadow_mapping.tiers")
+
+go.property("component", msg.url("#model"))
+
+go.property("low_material", resource.material("/shadow_mapping/materials/low/diffuse.material"))
+go.property("mid_material", resource.material("/shadow_mapping/materials/mid/diffuse.material"))
+go.property("high_material", resource.material("/shadow_mapping/materials/high/diffuse.material"))
+
+function init()
+    tiers.register()
+end
+
+function final()
+    tiers.unregister()
+end
+
+function on_message(self, message_id, message)
+    if message_id == tiers.MSG_CHANGE_TIER then
+        go.set(self.component, tiers.PROP_MATERIAL, self[message.tier])
+    elseif message_id == tiers.MSG_REMOVE_FROM_TIER then
+        tiers.unregister()
+    end
+end

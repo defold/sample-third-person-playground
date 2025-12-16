@@ -1,0 +1,116 @@
+name: "player"
+scale_along_z: 0
+embedded_instances {
+  id: "character"
+  children: "camera"
+  children: "character_rotation"
+  data: "components {\n"
+  "  id: \"collisions\"\n"
+  "  component: \"/game/player_collisions.script\"\n"
+  "}\n"
+  "components {\n"
+  "  id: \"player\"\n"
+  "  component: \"/game/player_controller.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_DYNAMIC\\n"
+  "mass: 80.0\\n"
+  "friction: 0.9\\n"
+  "restitution: 0.0\\n"
+  "group: \\\"player\\\"\\n"
+  "mask: \\\"ground\\\"\\n"
+  "mask: \\\"ball\\\"\\n"
+  "mask: \\\"env\\\"\\n"
+  "mask: \\\"gold\\\"\\n"
+  "mask: \\\"gold_target\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      y: 50.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 50.0\\n"
+  "  data: 50.0\\n"
+  "  data: 50.0\\n"
+  "}\\n"
+  "linear_damping: 0.99\\n"
+  "angular_damping: 0.9\\n"
+  "locked_rotation: true\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "camera"
+  data: "embedded_components {\n"
+  "  id: \"camera\"\n"
+  "  type: \"camera\"\n"
+  "  data: \"aspect_ratio: 1.0\\n"
+  "fov: 0.7854\\n"
+  "near_z: 0.1\\n"
+  "far_z: 5000.0\\n"
+  "auto_aspect_ratio: 1\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    y: 1660.0
+    z: 830.0
+  }
+  rotation {
+    x: -0.4539905
+    w: 0.8910065
+  }
+}
+embedded_instances {
+  id: "character_rotation"
+  children: "character_model"
+  data: ""
+}
+embedded_instances {
+  id: "character_model"
+  data: "components {\n"
+  "  id: \"model\"\n"
+  "  component: \"/assets/models/character/character.model\"\n"
+  "  rotation {\n"
+  "    x: -0.70710677\n"
+  "    w: 0.70710677\n"
+  "  }\n"
+  "}\n"
+  "components {\n"
+  "  id: \"model_tiers\"\n"
+  "  component: \"/shadow_mapping/model_tiers.script\"\n"
+  "  properties {\n"
+  "    id: \"low_material\"\n"
+  "    value: \"/shadow_mapping/materials/low/diffuse_skinning.material\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"mid_material\"\n"
+  "    value: \"/shadow_mapping/materials/mid/diffuse_skinning.material\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"high_material\"\n"
+  "    value: \"/shadow_mapping/materials/high/diffuse_skinning.material\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "}\n"
+  ""
+  rotation {
+    x: 0.70710677
+    w: 0.70710677
+  }
+  scale3 {
+    x: 150.0
+    y: 150.0
+    z: 150.0
+  }
+}

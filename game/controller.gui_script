@@ -1,0 +1,48 @@
+function init(self)
+    msg.post(".", "acquire_input_focus")
+
+    self.joystick_area = gui.get_node("joystick_area")
+    self.joystick_back = gui.get_node("joystick_back")
+    self.joystick_move = gui.get_node("joystick_move")
+    self.center = gui.get_position(self.joystick_move)
+    self.position = vmath.vector3(self.center)
+    self.direction = vmath.vector3(0, 0, 1)
+    self.max_distance = gui.get_size(self.joystick_back).x / 2
+    self.joystick_active = false
+end
+
+function on_input(self, action_id, action)
+    if action_id == hash("touch") then
+        if self.joystick_active then
+            if action.released then
+                ---Reset position
+                self.joystick_active = false
+                gui.set_position(self.joystick_move, self.center)
+                msg.post("game:/player/character", hash("MOVE"), { direction = self.direction, strength = 0 })
+            else
+                self.direction.x = action.x - self.center.x
+                self.direction.y = action.y - self.center.y
+                local length = vmath.length(self.direction)
+                if length ~= 0 then
+                    self.direction = vmath.normalize(self.direction)
+                end
+                self.position.x = action.x
+                self.position.y = action.y
+                if length > self.max_distance then
+                    self.position.x = self.center.x + self.direction.x * self.max_distance
+                    self.position.y = self.center.y + self.direction.y * self.max_distance
+                    length = self.max_distance
+                end
+                gui.set_position(self.joystick_move, self.position)
+                msg.post("game:/player/character", hash("MOVE"), { direction = self.direction, strength = length / self.max_distance })
+            end
+        elseif gui.pick_node(self.joystick_area, action.x, action.y) and action.pressed then
+            self.center.x = action.x
+            self.center.y = action.y
+            self.direction.z = 1
+            gui.set_position(self.joystick_back, self.center)
+            gui.set_position(self.joystick_move, self.center)
+            self.joystick_active = true
+        end
+    end
+end

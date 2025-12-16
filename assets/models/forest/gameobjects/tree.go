@@ -1,0 +1,35 @@
+components {
+  id: "model"
+  component: "/assets/models/forest/models/tree_1.model"
+}
+components {
+  id: "model_tiers"
+  component: "/shadow_mapping/model_tiers.script"
+}
+embedded_components {
+  id: "collisionobject"
+  type: "collisionobject"
+  data: "type: COLLISION_OBJECT_TYPE_STATIC\n"
+  "mass: 0.0\n"
+  "friction: 0.1\n"
+  "restitution: 0.5\n"
+  "group: \"env\"\n"
+  "mask: \"ball\"\n"
+  "mask: \"player\"\n"
+  "embedded_collision_shape {\n"
+  "  shapes {\n"
+  "    shape_type: TYPE_BOX\n"
+  "    position {\n"
+  "      y: 3.0\n"
+  "    }\n"
+  "    rotation {\n"
+  "    }\n"
+  "    index: 0\n"
+  "    count: 3\n"
+  "  }\n"
+  "  data: 0.2993205\n"
+  "  data: 3.5\n"
+  "  data: 0.272852\n"
+  "}\n"
+  ""
+}

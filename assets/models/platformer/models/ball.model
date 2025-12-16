@@ -1,0 +1,10 @@
+mesh: "/assets/models/platformer/sources/ball.glb"
+name: "ball"
+materials {
+  name: "platformer.002"
+  material: "/shadow_mapping/materials/high/diffuse.material"
+  textures {
+    sampler: "tex0"
+    texture: "/assets/models/platformer/platformer_texture.png"
+  }
+}

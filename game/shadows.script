@@ -1,0 +1,15 @@
+local shadow_mapping = require "shadow_mapping.shadow_mapping"
+
+function init(self)
+    ---Shadows settings
+    local width = 10000
+    local height = 10000
+    local near = 1
+    local far = 20000
+    local proj = vmath.matrix4_orthographic(-width / 2, width / 2, -height / 2, height / 2, near, far)
+    shadow_mapping.set_light_projection(proj)
+
+    local position = vmath.vector3(-535, 8264, 5604)
+    local rotation = vmath.quat_rotation_y(math.rad(-5)) * vmath.quat_rotation_x(math.rad(-58))
+    shadow_mapping.calculate_light_transform(position, rotation)
+end

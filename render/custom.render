@@ -1,0 +1,13 @@
+script: "/render/custom.render_script"
+render_resources {
+  name: "shadow_low_material"
+  path: "/shadow_mapping/materials/low/shadow.material"
+}
+render_resources {
+  name: "shadow_mid_material"
+  path: "/shadow_mapping/materials/mid/shadow.material"
+}
+render_resources {
+  name: "shadow_high_material"
+  path: "/shadow_mapping/materials/high/shadow.material"
+}

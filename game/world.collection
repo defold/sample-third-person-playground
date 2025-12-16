@@ -1,0 +1,1502 @@
+name: "game"
+instances {
+  id: "tree_1"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: 541.0
+    z: -1401.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "tree_4"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: -290.0
+    z: 978.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "tree_7"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: 878.0
+    z: -1350.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "tree_9"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: 1023.0
+    z: -573.0
+  }
+  rotation {
+    y: -0.33751836
+    w: 0.9413189
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "tree_2"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: 541.0
+    z: -1401.0
+  }
+  rotation {
+    y: 0.49242356
+    w: 0.8703557
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "tree_3"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: -522.0
+    z: -516.0
+  }
+  rotation {
+    y: 0.8838327
+    w: 0.46780318
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "tree_8"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: 1308.0
+    z: 941.0
+  }
+  rotation {
+    y: -0.29777622
+    w: 0.9546357
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "tree_10"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: -290.0
+    z: -1036.0
+  }
+  scale3 {
+    x: 150.0
+    y: 150.0
+    z: 150.0
+  }
+}
+instances {
+  id: "tree_5"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: 77.0
+    z: -917.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "tree_6"
+  prototype: "/assets/models/forest/gameobjects/tree.go"
+  position {
+    x: 51.0
+    z: -1304.0
+  }
+  rotation {
+    y: 0.3007058
+    w: 0.95371693
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "rock_1"
+  prototype: "/assets/models/forest/gameobjects/rock.go"
+  position {
+    x: 295.0
+    y: 24.0
+    z: -1407.0
+  }
+  scale3 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+  }
+}
+instances {
+  id: "rock_2"
+  prototype: "/assets/models/forest/gameobjects/rock.go"
+  position {
+    x: 739.0
+    y: 24.0
+    z: -1407.0
+  }
+  rotation {
+    y: -0.6141761
+    w: 0.789169
+  }
+  scale3 {
+    x: 60.0
+    y: 60.0
+    z: 60.0
+  }
+}
+instances {
+  id: "rock_3"
+  prototype: "/assets/models/forest/gameobjects/rock.go"
+  position {
+    x: 1553.0
+    y: 32.0
+    z: -206.0
+  }
+  rotation {
+    y: -0.3289684
+    w: 0.94434094
+  }
+  scale3 {
+    x: 35.0
+    y: 35.0
+    z: 35.0
+  }
+}
+instances {
+  id: "rock_4"
+  prototype: "/assets/models/forest/gameobjects/rock.go"
+  position {
+    x: 1452.0
+    y: 43.0
+    z: -259.0
+  }
+  rotation {
+    y: -0.79620945
+    w: 0.6050211
+  }
+  scale3 {
+    x: 40.0
+    y: 40.0
+    z: 40.0
+  }
+}
+instances {
+  id: "rock_5"
+  prototype: "/assets/models/forest/gameobjects/rock.go"
+  position {
+    x: -678.0
+    y: 52.0
+    z: 839.0
+  }
+  rotation {
+    y: -0.3289684
+    w: 0.94434094
+  }
+  scale3 {
+    x: 75.0
+    y: 75.0
+    z: 75.0
+  }
+}
+instances {
+  id: "grass_1"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 462.0
+    y: 10.0
+    z: -939.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_2"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 293.0
+    z: -995.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_3"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 547.0
+    z: -993.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_4"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 418.0
+    z: -982.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_5"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 348.0
+    z: -961.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_6"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 492.0
+    z: -1022.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_7"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 414.0
+    z: -1041.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_8"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 348.0
+    z: -1022.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_12"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 391.0
+    y: 10.0
+    z: -905.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_9"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 524.0
+    y: 10.0
+    z: -925.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_10"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 450.0
+    y: 10.0
+    z: -865.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "grass_11"
+  prototype: "/assets/models/forest/gameobjects/grass.go"
+  position {
+    x: 309.0
+    y: 10.0
+    z: -892.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "ball1"
+  prototype: "/assets/models/platformer/gameobjects/ball.go"
+  position {
+    y: 190.0
+    z: 342.0
+  }
+  scale3 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+  }
+}
+instances {
+  id: "ball2"
+  prototype: "/assets/models/platformer/gameobjects/ball.go"
+  position {
+    x: 183.0
+    y: 224.0
+    z: 342.0
+  }
+  scale3 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+  }
+}
+instances {
+  id: "ball3"
+  prototype: "/assets/models/platformer/gameobjects/ball.go"
+  position {
+    y: 111.0
+    z: 236.0
+  }
+  scale3 {
+    x: 50.0
+    y: 50.0
+    z: 50.0
+  }
+}
+instances {
+  id: "wood2"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -513.0
+    y: 32.0
+    z: -964.0
+  }
+  rotation {
+    y: 0.03389595
+    w: 0.99942535
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood26"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 1506.0
+    y: 32.0
+    z: 1240.0
+  }
+  rotation {
+    x: 1.1805682E-15
+    y: 0.7804033
+    z: -2.0898566E-16
+    w: 0.62527645
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood10"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -8.0
+    y: 32.0
+    z: -1585.0
+  }
+  rotation {
+    y: -0.6489133
+    w: 0.76086235
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood23"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 880.0
+    y: 32.0
+    z: 1141.0
+  }
+  rotation {
+    y: 0.582396
+    w: 0.81290525
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood9"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: -285.0
+    y: 32.0
+    z: -1473.0
+  }
+  rotation {
+    y: -0.40211812
+    w: 0.9155878
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood11"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 292.0
+    y: 32.0
+    z: -1698.0
+  }
+  rotation {
+    y: -0.60686386
+    w: 0.79480577
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood6"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -708.0
+    y: 32.0
+    z: -238.0
+  }
+  rotation {
+    y: -0.022698449
+    w: 0.9997423
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood24"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 1194.0
+    y: 32.0
+    z: 1246.0
+  }
+  rotation {
+    y: 0.70710677
+    w: 0.70710677
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood18"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 1516.0
+    y: 32.0
+    z: -412.0
+  }
+  rotation {
+    y: -0.7250102
+    w: 0.6887381
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood12"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 889.0
+    y: 32.0
+    z: -1658.0
+  }
+  rotation {
+    x: -1.1012651E-15
+    y: 0.5661378
+    z: 4.9152644E-16
+    w: 0.8243106
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood19"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 1847.0
+    y: 32.0
+    z: -443.0
+  }
+  rotation {
+    y: -0.788601
+    w: 0.6149053
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood3"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -788.0
+    y: 32.0
+    z: 575.0
+  }
+  rotation {
+    y: 0.049771246
+    w: 0.99876064
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood14"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 1079.0
+    y: 32.0
+    z: -1420.0
+  }
+  rotation {
+    y: -0.99757504
+    w: 0.06959881
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood25"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 2011.0
+    y: 32.0
+    z: 733.0
+  }
+  rotation {
+    x: 1.0112643E-15
+    y: 0.9977702
+    z: 6.4401916E-16
+    w: -0.06674298
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood8"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -446.0
+    y: 32.0
+    z: -1244.0
+  }
+  rotation {
+    y: -0.19639404
+    w: 0.9805251
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood22"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 568.0
+    y: 32.0
+    z: 1114.0
+  }
+  rotation {
+    y: 0.70710677
+    w: 0.70710677
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood29"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: -681.0
+    y: 32.0
+    z: -511.0
+  }
+  rotation {
+    x: 0.005613188
+    y: 0.059122648
+    z: 0.094349556
+    w: 0.9937662
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood17"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 1242.0
+    y: 32.0
+    z: -535.0
+  }
+  rotation {
+    x: 2.349075E-16
+    y: -0.9170317
+    z: -2.7739778E-15
+    w: 0.39881438
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood7"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -551.0
+    y: 32.0
+    z: -712.0
+  }
+  rotation {
+    y: -0.40211812
+    w: 0.9155878
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood16"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 1087.0
+    y: 32.0
+    z: -805.0
+  }
+  rotation {
+    x: 1.0859346E-15
+    y: -0.9818578
+    z: -4.152397E-16
+    w: 0.18961892
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood21"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 254.0
+    y: 32.0
+    z: 1098.0
+  }
+  rotation {
+    y: 0.60807544
+    w: 0.7938792
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood13"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 596.0
+    y: 32.0
+    z: -1712.0
+  }
+  rotation {
+    y: -0.788601
+    w: 0.6149053
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood4"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: -732.0
+    y: 32.0
+    z: 306.0
+  }
+  rotation {
+    z: 0.12257906
+    w: 0.99245876
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood20"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 2023.0
+    y: 32.0
+    z: -218.0
+  }
+  rotation {
+    y: -0.9990273
+    w: 0.04409602
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood27"
+  prototype: "/assets/models/forest/gameobjects/wood_2.go"
+  position {
+    x: 1810.0
+    y: 32.0
+    z: 1226.0
+  }
+  rotation {
+    x: 1.1321089E-15
+    y: 0.6706577
+    z: -3.9464634E-16
+    w: 0.7417669
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood15"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 1077.0
+    y: 32.0
+    z: -1119.0
+  }
+  rotation {
+    y: -0.99559325
+    w: -0.09377703
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood1"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -53.0
+    y: 32.0
+    z: 1065.0
+  }
+  rotation {
+    y: 0.70710677
+    w: 0.70710677
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood28"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: 1990.0
+    y: 32.0
+    z: 1034.0
+  }
+  rotation {
+    x: 7.2729033E-16
+    y: 0.9998578
+    z: -4.474243E-16
+    w: 0.01686402
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood5"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -709.0
+    y: 32.0
+    z: 33.0
+  }
+  rotation {
+    y: 0.053050198
+    w: 0.99859184
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "wood30"
+  prototype: "/assets/models/forest/gameobjects/wood_1.go"
+  position {
+    x: -439.0
+    y: 32.0
+    z: 1065.0
+  }
+  rotation {
+    y: 0.63848513
+    w: 0.7696341
+  }
+  scale3 {
+    x: 200.0
+    y: 200.0
+    z: 200.0
+  }
+}
+instances {
+  id: "fuel_barell2"
+  prototype: "/assets/models/forest/gameobjects/fuel_barell.go"
+  position {
+    x: 561.0
+    y: 75.0
+    z: 954.0
+  }
+  scale3 {
+    x: 150.0
+    y: 150.0
+    z: 150.0
+  }
+}
+instances {
+  id: "fuel_barell1"
+  prototype: "/assets/models/forest/gameobjects/fuel_barell.go"
+  position {
+    x: -167.0
+    y: 75.0
+    z: -849.0
+  }
+  scale3 {
+    x: 150.0
+    y: 150.0
+    z: 150.0
+  }
+}
+instances {
+  id: "pallet_covered"
+  prototype: "/assets/models/forest/gameobjects/pallet_covered.go"
+  position {
+    x: -402.0
+    z: 398.0
+  }
+  scale3 {
+    x: 150.0
+    y: 150.0
+    z: 150.0
+  }
+}
+instances {
+  id: "gold_bar8"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 1354.0
+    y: 106.0
+    z: 775.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 1106.0
+    y: 106.0
+    z: 826.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar11"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 1491.0
+    y: 106.0
+    z: -2.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar3"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 140.0
+    z: 717.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar5"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 199.0
+    y: 176.0
+    z: 717.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar12"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 799.0
+    y: 106.0
+    z: -845.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar2"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 199.0
+    y: 91.0
+    z: 717.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar4"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 141.0
+    y: 54.0
+    z: 717.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar13"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 762.0
+    y: 106.0
+    z: -866.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar7"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 1209.0
+    y: 106.0
+    z: 794.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar9"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 1624.0
+    y: 106.0
+    z: 86.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar1"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 199.0
+    y: 41.0
+    z: 717.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar6"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 114.0
+    y: 142.0
+    z: 717.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar10"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 1564.0
+    y: 106.0
+    z: 37.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+instances {
+  id: "gold_bar14"
+  prototype: "/assets/models/forest/gameobjects/gold_bar.go"
+  position {
+    x: 778.0
+    y: 106.0
+    z: -919.0
+  }
+  scale3 {
+    x: 100.0
+    y: 100.0
+    z: 100.0
+  }
+}
+collection_instances {
+  id: "pier"
+  collection: "/assets/models/forest/collections/pier.collection"
+  position {
+    x: 2280.0
+    y: -1.0
+    z: 246.0
+  }
+}
+collection_instances {
+  id: "rise"
+  collection: "/assets/models/forest/collections/rise.collection"
+}
+scale_along_z: 0
+embedded_instances {
+  id: "surface"
+  children: "surface_shadow"
+  data: "components {\n"
+  "  id: \"surface\"\n"
+  "  component: \"/game/surface/surface.tilemap\"\n"
+  "  position {\n"
+  "    x: -500.0\n"
+  "    z: -500.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.70710677\n"
+  "    w: 0.70710677\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_STATIC\\n"
+  "mass: 0.0\\n"
+  "friction: 0.9\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"ground\\\"\\n"
+  "mask: \\\"ball\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "mask: \\\"gold\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 5000.0\\n"
+  "  data: 10.0\\n"
+  "  data: 5000.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "trees"
+  children: "tree_1"
+  children: "tree_10"
+  children: "tree_2"
+  children: "tree_3"
+  children: "tree_4"
+  children: "tree_5"
+  children: "tree_6"
+  children: "tree_7"
+  children: "tree_8"
+  children: "tree_9"
+  data: ""
+}
+embedded_instances {
+  id: "rocks"
+  children: "rock_1"
+  children: "rock_2"
+  children: "rock_3"
+  children: "rock_4"
+  children: "rock_5"
+  data: ""
+}
+embedded_instances {
+  id: "grass"
+  children: "grass_1"
+  children: "grass_10"
+  children: "grass_11"
+  children: "grass_12"
+  children: "grass_2"
+  children: "grass_3"
+  children: "grass_4"
+  children: "grass_5"
+  children: "grass_6"
+  children: "grass_7"
+  children: "grass_8"
+  children: "grass_9"
+  data: ""
+}
+embedded_instances {
+  id: "balls"
+  children: "ball1"
+  children: "ball2"
+  children: "ball3"
+  data: ""
+}
+embedded_instances {
+  id: "woods"
+  children: "wood1"
+  children: "wood10"
+  children: "wood11"
+  children: "wood12"
+  children: "wood13"
+  children: "wood14"
+  children: "wood15"
+  children: "wood16"
+  children: "wood17"
+  children: "wood18"
+  children: "wood19"
+  children: "wood2"
+  children: "wood20"
+  children: "wood21"
+  children: "wood22"
+  children: "wood23"
+  children: "wood24"
+  children: "wood25"
+  children: "wood26"
+  children: "wood27"
+  children: "wood28"
+  children: "wood29"
+  children: "wood3"
+  children: "wood30"
+  children: "wood4"
+  children: "wood5"
+  children: "wood6"
+  children: "wood7"
+  children: "wood8"
+  children: "wood9"
+  data: ""
+}
+embedded_instances {
+  id: "other"
+  children: "fuel_barell1"
+  children: "fuel_barell2"
+  data: ""
+}
+embedded_instances {
+  id: "surface_shadow"
+  data: "components {\n"
+  "  id: \"model_tiers\"\n"
+  "  component: \"/shadow_mapping/model_tiers.script\"\n"
+  "  properties {\n"
+  "    id: \"low_material\"\n"
+  "    value: \"/shadow_mapping/materials/low/diffuse_transparent.material\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"mid_material\"\n"
+  "    value: \"/shadow_mapping/materials/mid/diffuse_transparent.material\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "  properties {\n"
+  "    id: \"high_material\"\n"
+  "    value: \"/shadow_mapping/materials/high/diffuse_transparent.material\"\n"
+  "    type: PROPERTY_TYPE_HASH\n"
+  "  }\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/builtins/assets/meshes/quad.dae\\\"\\n"
+  "name: \\\"{{NAME}}\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"default\\\"\\n"
+  "  material: \\\"/shadow_mapping/materials/high/diffuse_transparent.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"tex0\\\"\\n"
+  "    texture: \\\"/assets/images/alpha.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "create_go_bones: false\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    y: 0.01
+  }
+  rotation {
+    x: 0.70710677
+    w: 0.70710677
+  }
+  scale3 {
+    x: 10000.0
+    y: 10000.0
+  }
+}
+embedded_instances {
+  id: "gold_target"
+  data: "embedded_components {\n"
+  "  id: \"collisionobject\"\n"
+  "  type: \"collisionobject\"\n"
+  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
+  "mass: 0.0\\n"
+  "friction: 0.1\\n"
+  "restitution: 0.5\\n"
+  "group: \\\"gold_target\\\"\\n"
+  "mask: \\\"player\\\"\\n"
+  "embedded_collision_shape {\\n"
+  "  shapes {\\n"
+  "    shape_type: TYPE_BOX\\n"
+  "    position {\\n"
+  "      x: -9.0\\n"
+  "      y: 68.0\\n"
+  "      z: 11.0\\n"
+  "    }\\n"
+  "    rotation {\\n"
+  "    }\\n"
+  "    index: 0\\n"
+  "    count: 3\\n"
+  "  }\\n"
+  "  data: 100.0\\n"
+  "  data: 75.0\\n"
+  "  data: 100.0\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: -394.0
+    z: 161.0
+  }
+}
+embedded_instances {
+  id: "gold_release_position"
+  data: ""
+  position {
+    x: -399.0
+    y: 360.0
+    z: 383.0
+  }
+}
+embedded_instances {
+  id: "gold_bars"
+  children: "gold_bar"
+  children: "gold_bar1"
+  children: "gold_bar10"
+  children: "gold_bar11"
+  children: "gold_bar12"
+  children: "gold_bar13"
+  children: "gold_bar14"
+  children: "gold_bar2"
+  children: "gold_bar3"
+  children: "gold_bar4"
+  children: "gold_bar5"
+  children: "gold_bar6"
+  children: "gold_bar7"
+  children: "gold_bar8"
+  children: "gold_bar9"
+  data: ""
+}

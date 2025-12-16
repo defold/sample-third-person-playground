@@ -1,0 +1,60 @@
+local tiers = require("shadow_mapping.tiers")
+
+local COUNT = 6
+local ACCEPTABLE_FRAME_TIME = 0.039
+
+local all_tiers = {
+    [1] = tiers.LOW,
+    [2] = tiers.MID,
+    [3] = tiers.HIGH
+}
+
+local function reset_counter(self)
+    self.count = {}
+    self.num = 1
+    self.decided = false
+end
+
+---Start a timer that will determine if the FPS count is enough or if it’s necessary to decrease shadows quality.
+local function decide_on_tier(self, tier_num)
+    tiers.change_tier(all_tiers[tier_num])
+    reset_counter(self)
+    self.timer = timer.delay(0.5, false, function()
+        local sum = 0
+        for _, v in pairs(self.count) do
+            sum = sum + v
+        end
+        local dt = sum / #self.count
+        if dt > ACCEPTABLE_FRAME_TIME and tier_num > 1 then
+            tier_num = tier_num - 1
+            decide_on_tier(self, tier_num)
+        else
+            self.decided = true
+            self.timer = nil
+        end
+    end)
+end
+
+function init(self)
+    reset_counter(self)
+    ---You can send the message tiers.MSG_DECIDE to begin the check once the level is loaded, or simply call this function manually.
+    decide_on_tier(self, #all_tiers)
+end
+
+function on_message(self, message_id, message, sender)
+    if message_id == tiers.MSG_DECIDE then
+        if not self.timer then
+            decide_on_tier(self, #all_tiers)
+        end
+    end
+end
+
+function update(self, dt)
+    if not self.decided then
+        self.count[self.num] = dt
+        self.num = self.num + 1
+        if self.num > COUNT then
+            self.num = 1
+        end
+    end
+end

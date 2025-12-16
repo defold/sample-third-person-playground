@@ -1,0 +1,118 @@
+local ACCELERATION = 800
+local ROTATION_SPEED = 200 -- degrees per second (for keyboard controls)
+local MIN_VELOCITY_FOR_MOVING = 1
+local MIN_VELOCITY_FOR_RUNNING = 700
+
+local ACTION_FORWARD = hash("forward")
+local ACTION_BACK = hash("back")
+local ACTION_LEFT = hash("left")
+local ACTION_RIGHT = hash("right")
+
+--- Character animation states
+local STATES = {
+    IDLE = 1,
+    WALKING = 2,
+    RUN = 3,
+}
+
+local function rotate_point(point, phi)
+    local cos = math.cos(phi)
+    local sin = math.sin(phi)
+    local result = vmath.vector3()
+    result.x = point.x * cos - point.y * sin
+    result.y = point.x * sin + point.y * cos
+    return result
+end
+
+local function play_anim(anim_id, playback, play_properties, complete_function)
+    model.play_anim("/player/character_model#model", anim_id, playback, play_properties, complete_function)
+end
+
+local function run(self)
+    if self.state ~= STATES.RUN then
+        self.state = STATES.RUN
+        play_anim("Jog_Fwd_Loop", go.PLAYBACK_LOOP_FORWARD, { blend_duration = 0.2 })
+    end
+end
+
+local function walk(self)
+    if self.state ~= STATES.WALKING then
+        self.state = STATES.WALKING
+        play_anim("Walk_Loop", go.PLAYBACK_LOOP_FORWARD, { blend_duration = 0.2 })
+    end
+end
+
+local function idle(self)
+    if self.state ~= STATES.IDLE then
+        self.state = STATES.IDLE
+        play_anim("Idle_Loop", go.PLAYBACK_LOOP_FORWARD, { blend_duration = 0.2 })
+    end
+end
+
+function init(self)
+    msg.post(".", "acquire_input_focus")
+
+    self.state = STATES.IDLE
+    -- Direction of rotation (-1 = counter clockwise, 1 = clockwise, 0 = no rotation)
+    self.rotation = 0
+    -- Direction of movement (-1 = backwards, 1 = forwards, 0 = no movement)
+    self.movement = 0
+
+    -- the force to apply to the player, in Newton
+    self.force = vmath.vector3()
+
+    -- Base rotation of the player character in the world. This rotation should not change
+    -- and it is only set at "design time" in the game.collection. The child game object
+    -- /player/character_rotation is the one we rotate to visually rotate the player model
+    self.base_rotation = math.rad(go.get("/player/character", "euler.y"))
+    self.direction = vmath.vector3(math.sin(self.base_rotation), -math.cos(self.base_rotation), 0)
+end
+
+function update(self, dt)
+    -- Update animations based on current velocity
+    local velocity = vmath.length(go.get("#collisionobject", "linear_velocity"))
+    if velocity >= MIN_VELOCITY_FOR_RUNNING then
+        run(self)
+    elseif velocity > MIN_VELOCITY_FOR_MOVING then
+        walk(self)
+    else
+        idle(self)
+    end
+
+    -- Apply a new rotation to the character
+    local rotation = math.atan2(self.direction.x, -self.direction.y)
+    if self.rotation ~= 0 then
+        rotation = rotation - self.rotation * math.rad(ROTATION_SPEED) * dt
+        self.direction.x = math.sin(rotation)
+        self.direction.y = -math.cos(rotation)
+    end
+    go.set_rotation(vmath.quat_rotation_y(rotation - self.base_rotation), "/player/character_rotation")
+end
+
+function fixed_update(self, dt)
+    -- Apply force to a character if moving
+    if self.movement ~= 0 then
+        self.force.x = self.direction.x * self.movement * ACCELERATION * 1000
+        self.force.z = -self.direction.y * self.movement * ACCELERATION * 1000
+        msg.post("#collisionobject", "apply_force", { force = self.force, position = go.get_position() })
+    end
+end
+
+function on_message(self, message_id, message, sender)
+    if message_id == hash("MOVE") then
+        self.direction = rotate_point(message.direction, self.base_rotation)
+        self.movement = message.strength
+    end
+end
+
+function on_input(self, action_id, action)
+    if action_id == ACTION_FORWARD then
+        self.movement = action.value
+    elseif action_id == ACTION_BACK then
+        self.movement = -action.value
+    elseif action_id == ACTION_LEFT then
+        self.rotation = -action.value
+    elseif action_id == ACTION_RIGHT then
+        self.rotation = action.value
+    end
+end

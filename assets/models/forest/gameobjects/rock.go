@@ -1,0 +1,35 @@
+components {
+  id: "model"
+  component: "/assets/models/forest/models/rock_1.model"
+}
+components {
+  id: "model_tiers"
+  component: "/shadow_mapping/model_tiers.script"
+}
+embedded_components {
+  id: "collisionobject"
+  type: "collisionobject"
+  data: "type: COLLISION_OBJECT_TYPE_STATIC\n"
+  "mass: 0.0\n"
+  "friction: 0.1\n"
+  "restitution: 0.5\n"
+  "group: \"env\"\n"
+  "mask: \"ball\"\n"
+  "mask: \"player\"\n"
+  "embedded_collision_shape {\n"
+  "  shapes {\n"
+  "    shape_type: TYPE_BOX\n"
+  "    position {\n"
+  "      x: 0.3\n"
+  "    }\n"
+  "    rotation {\n"
+  "    }\n"
+  "    index: 0\n"
+  "    count: 3\n"
+  "  }\n"
+  "  data: 2.5\n"
+  "  data: 2.0\n"
+  "  data: 2.0\n"
+  "}\n"
+  ""
+}

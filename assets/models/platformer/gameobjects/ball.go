@@ -1,0 +1,36 @@
+components {
+  id: "model"
+  component: "/assets/models/platformer/models/ball.model"
+}
+components {
+  id: "model_tiers"
+  component: "/shadow_mapping/model_tiers.script"
+}
+embedded_components {
+  id: "collisionobject"
+  type: "collisionobject"
+  data: "type: COLLISION_OBJECT_TYPE_DYNAMIC\n"
+  "mass: 5.0\n"
+  "friction: 0.9\n"
+  "restitution: 0.5\n"
+  "group: \"ball\"\n"
+  "mask: \"player\"\n"
+  "mask: \"ground\"\n"
+  "mask: \"ball\"\n"
+  "mask: \"env\"\n"
+  "embedded_collision_shape {\n"
+  "  shapes {\n"
+  "    shape_type: TYPE_SPHERE\n"
+  "    position {\n"
+  "    }\n"
+  "    rotation {\n"
+  "    }\n"
+  "    index: 0\n"
+  "    count: 1\n"
+  "  }\n"
+  "  data: 1.0\n"
+  "}\n"
+  "linear_damping: 0.8\n"
+  "angular_damping: 0.5\n"
+  ""
+}

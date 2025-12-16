@@ -1,0 +1,7 @@
+images {
+  image: "/assets/images/alpha.png"
+}
+images {
+  image: "/assets/images/cicle.png"
+}
+margin: 2

@@ -1,0 +1,60 @@
+[bootstrap]
+main_collection = /game/game.collectionc
+render = /render/custom.renderc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1136
+height = 640
+high_dpi = 1
+display_profiles = /render/custom.display_profilesc
+
+[android]
+input_method = HiddenInputField
+package = com.defold.sample.thirdpersonplayground
+
+[project]
+dependencies = 
+title = ThirdPersonPlayground
+
+[physics]
+type = 3D
+scale = 0.01
+gravity_y = -2500.0
+max_collisions = 128
+max_contacts = 256
+trigger_overlap_capacity = 32
+use_fixed_timestep = 1
+
+[osx]
+bundle_identifier = com.defold.sample.thirdpersonplayground
+
+[ios]
+bundle_identifier = com.defold.sample.thirdpersonplayground
+
+[html5]
+scale_mode = stretch
+
+[native_extension]
+app_manifest = /app.appmanifest
+
+[render]
+clear_color_red = 1.0
+clear_color_green = 1.0
+clear_color_blue = 1.0
+
+[graphics]
+texture_profiles = /render/custom.texture_profiles
+
+[input]
+game_binding = /input/game.input_bindingc
+
+[tilemap]
+max_tile_count = 4096
+
+[engine]
+fixed_update_frequency = 60
+max_time_step = 1.0
+

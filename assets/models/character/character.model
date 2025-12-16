@@ -1,0 +1,17 @@
+mesh: "/assets/models/character/character.glb"
+skeleton: "/assets/models/character/character.glb"
+animations: "/assets/models/character/character.glb"
+default_animation: "Idle_Loop"
+name: "character_mesh2motion"
+materials {
+  name: "M_Main.001"
+  material: "/shadow_mapping/materials/high/diffuse_skinning.material"
+  textures {
+    sampler: "tex0"
+    texture: "/assets/models/character/character.png"
+  }
+  textures {
+    sampler: "tex_depth"
+    texture: "/assets/models/character/character.png"
+  }
+}
