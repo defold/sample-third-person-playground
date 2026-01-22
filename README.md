@@ -4,6 +4,7 @@
 * 3D models
 * Shadows
 
+Try it in your browser: https://defold.com/sample-third-person-playground/
 
 ## Credits
 
