@@ -30,6 +30,38 @@ key_trigger {
   input: KEY_S
   action: "back"
 }
+gamepad_trigger {
+  input: GAMEPAD_LSTICK_LEFT
+  action: "gamepad_lstick_left"
+}
+gamepad_trigger {
+  input: GAMEPAD_LSTICK_RIGHT
+  action: "gamepad_lstick_right"
+}
+gamepad_trigger {
+  input: GAMEPAD_LSTICK_UP
+  action: "gamepad_lstick_up"
+}
+gamepad_trigger {
+  input: GAMEPAD_LSTICK_DOWN
+  action: "gamepad_lstick_down"
+}
+gamepad_trigger {
+  input: GAMEPAD_LPAD_LEFT
+  action: "left"
+}
+gamepad_trigger {
+  input: GAMEPAD_LPAD_RIGHT
+  action: "right"
+}
+gamepad_trigger {
+  input: GAMEPAD_LPAD_UP
+  action: "forward"
+}
+gamepad_trigger {
+  input: GAMEPAD_LPAD_DOWN
+  action: "back"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "touch"
