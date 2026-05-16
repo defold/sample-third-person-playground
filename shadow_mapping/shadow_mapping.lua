@@ -1,8 +1,8 @@
 local M = {}
 local tiers = require("shadow_mapping.tiers")
 
-local BUFFER_WIDTH = 1024
-local BUFFER_HEIGHT = 1024
+local BUFFER_WIDTH = 2048
+local BUFFER_HEIGHT = 2048
 local BUFFER_NAME = "shadow_buffer"
 
 local SHADOW_MATERIAL_NAME = "shadow"
