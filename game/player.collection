@@ -21,7 +21,7 @@ embedded_instances {
   "restitution: 0.0\\n"
   "group: \\\"player\\\"\\n"
   "mask: \\\"ground\\\"\\n"
-  "mask: \\\"ball\\\"\\n"
+  "mask: \\\"movable\\\"\\n"
   "mask: \\\"env\\\"\\n"
   "mask: \\\"gold\\\"\\n"
   "mask: \\\"gold_target\\\"\\n"

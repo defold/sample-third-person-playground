@@ -11,6 +11,8 @@ function init(self)
     self.joystick_active = false
 end
 
+local MSG_MOVE_JOYSTICK_INPUT = hash("move_joystick_input")
+
 function on_input(self, action_id, action)
     if action_id == hash("touch") then
         if self.joystick_active then
@@ -18,7 +20,7 @@ function on_input(self, action_id, action)
                 ---Reset position
                 self.joystick_active = false
                 gui.set_position(self.joystick_move, self.center)
-                msg.post("game:/player/character", hash("MOVE"), { axis_x = 0, axis_y = 0 })
+                msg.post("game:/player/character", MSG_MOVE_JOYSTICK_INPUT, { axis_x = 0, axis_y = 0 })
             else
                 self.direction.x = action.x - self.center.x
                 self.direction.y = action.y - self.center.y
@@ -35,7 +37,7 @@ function on_input(self, action_id, action)
                 end
                 gui.set_position(self.joystick_move, self.position)
                 local strength = length / self.max_distance
-                msg.post("game:/player/character", hash("MOVE"), { axis_x = self.direction.x * strength, axis_y = self.direction.y * strength })
+                msg.post("game:/player/character", MSG_MOVE_JOYSTICK_INPUT, { axis_x = self.direction.x * strength, axis_y = self.direction.y * strength })
             end
         elseif gui.pick_node(self.joystick_area, action.x, action.y) and action.pressed then
             self.center.x = action.x

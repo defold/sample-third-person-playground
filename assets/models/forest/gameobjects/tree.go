@@ -14,7 +14,7 @@ embedded_components {
   "friction: 0.1\n"
   "restitution: 0.5\n"
   "group: \"env\"\n"
-  "mask: \"ball\"\n"
+  "mask: \"movable\"\n"
   "mask: \"player\"\n"
   "embedded_collision_shape {\n"
   "  shapes {\n"
