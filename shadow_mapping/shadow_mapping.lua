@@ -59,6 +59,13 @@ function M.init()
     M.light_transform = vmath.matrix4()
     M.light_projection = vmath.matrix4()
     M.light_constant_buffer = render.constant_buffer()
+    M.light_position = vmath.vector4()
+    M.shadow_target_options = { transient = { render.BUFFER_DEPTH_BIT } }
+    M.shadow_clear_buffers = {
+        [render.BUFFER_COLOR_BIT] = vmath.vector4(0, 0, 0, 1),
+        [render.BUFFER_DEPTH_BIT] = 1
+    }
+    M.shadow_draw_options = { constants = M.light_constant_buffer }
 
     M.bias_matrix = vmath.matrix4()
     M.bias_matrix.c0 = vmath.vector4(0.5, 0.0, 0.0, 0.0)
@@ -84,7 +91,7 @@ end
 
 local render_shadow_counter = 0
 
-function M.render_shadow(self)
+function M.render_shadow()
     if tiers.is_shadows_ignored() then
         return
     end
@@ -116,16 +123,13 @@ function M.render_shadow(self)
     -- render.set_cull_face(render.FACE_FRONT)
     -- render.enable_state(render.STATE_CULL_FACE)
 
-    render.set_render_target(M.light_buffer, { transient = { render.BUFFER_DEPTH_BIT } })
-    render.clear({
-        [render.BUFFER_COLOR_BIT] = vmath.vector4(0, 0, 0, 1),
-        [render.BUFFER_DEPTH_BIT] = 1
-    })
+    render.set_render_target(M.light_buffer, M.shadow_target_options)
+    render.clear(M.shadow_clear_buffers)
     render.enable_material(tiers.get_tier_for_material(SHADOW_MATERIAL_NAME))
     render.draw(M.shadow_surface_pred)
     render.draw(M.shadow_model_pred)
     render.draw(M.shadow_model_skinned_pred)
-    render.draw(self.predicates.particle)
+
     render.disable_material()
     render.set_render_target(render.RENDER_TARGET_DEFAULT)
 end
@@ -138,7 +142,7 @@ end
 function M.render_shadow_model(view, proj, frustum)
     local mtx_light = M.bias_matrix * M.light_projection * M.light_transform
     local inv_light = vmath.inv(M.light_transform)
-    local light = vmath.vector4()
+    local light = M.light_position
 
     light.x = inv_light.m03
     light.y = inv_light.m13
@@ -151,28 +155,33 @@ function M.render_shadow_model(view, proj, frustum)
     render.set_projection(proj)
     render.enable_state(render.STATE_DEPTH_TEST)
     render.disable_state(render.STATE_STENCIL_TEST)
-    render.enable_state(render.STATE_BLEND)
-    render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
-
-    --render.enable_state(render.STATE_CULL_FACE)
+    render.disable_state(render.STATE_CULL_FACE)
     render.set_cull_face(render.FACE_BACK)
-    --render.disable_state(render.STATE_CULL_FACE)
 
     render.set_view(view)
     render.set_depth_mask(true)
     if not tiers.is_shadows_ignored() then
         render.enable_texture(1, M.light_buffer, render.BUFFER_COLOR_BIT)
     end
-    render.draw(M.shadow_surface_pred, { frustum = frustum, constants = M.light_constant_buffer })
-    render.draw(M.shadow_model_pred, { frustum = frustum, constants = M.light_constant_buffer })
+    local shadow_options = M.shadow_draw_options
+    shadow_options.frustum = frustum
+
+    -- The shadow receiver is transparent and must stay before opaque models so it does not darken actors.
+    render.enable_state(render.STATE_BLEND)
+    render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
+    render.draw(M.shadow_surface_pred, shadow_options)
+
+    -- Current model textures are fully opaque; disabling blend avoids unnecessary blend work.
+    render.disable_state(render.STATE_BLEND)
+    render.draw(M.shadow_model_pred, shadow_options)
     if not tiers.is_mid_tier() then
-        render.draw(M.shadow_model_skinned_pred, { frustum = frustum, constants = M.light_constant_buffer })
+        render.draw(M.shadow_model_skinned_pred, shadow_options)
     end
     if not tiers.is_shadows_ignored() then
         render.disable_texture(1)
     end
     if tiers.is_mid_tier() then
-        render.draw(M.shadow_model_skinned_pred, { frustum = frustum, constants = M.light_constant_buffer })
+        render.draw(M.shadow_model_skinned_pred, shadow_options)
     end
 end
 
