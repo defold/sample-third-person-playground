@@ -23,8 +23,8 @@ local function random_speed(min_speed, max_speed)
 end
 
 ---@param url string URL of the sound component to play
----@param gain number Gain (volume) of the sound (optional)
----@param speed number Speed of the sound (optional)
+---@param gain? number Gain (volume) of the sound
+---@param speed? number Speed of the sound
 ---@return number identifier for the sound
 function M.play(url, gain, speed)
 	return sound.play(url, { gain = gain, speed = speed })
@@ -37,9 +37,9 @@ end
 
 --- Play a random sound from a list
 ---@param urls table<string> URLs of the sound components to play
----@param gain number Gain (volume) of the sound (optional)
----@param min_speed number Minimum speed of the sound (optional)
----@param max_speed number Maximum speed of the sound (optional)
+---@param gain? number Gain (volume) of the sound
+---@param min_speed? number Minimum speed of the sound
+---@param max_speed? number Maximum speed of the sound
 ---@return string, nil
 function M.play_random(urls, gain, min_speed, max_speed)
 	local url = urls[math.random(#urls)]
@@ -47,14 +47,13 @@ function M.play_random(urls, gain, min_speed, max_speed)
 end
 
 --- Play a sound with gating to prevent overlap
----@param self table
 ---@param key string Unique key for the gating
 ---@param url string URL of the sound component to play
 ---@param cooldown number Time in seconds before the sound can be played again
----@param gain number Gain (volume) of the sound (optional)
----@param speed number Speed of the sound (optional)
+---@param gain? number Gain (volume) of the sound
+---@param speed? number Speed of the sound
 ---@return boolean True if sound is played, false if gated
-function M.play_gated(self, key, url, cooldown, gain, speed)
+function M.play_gated(key, url, cooldown, gain, speed)
 	if M.SOUND_GATES[key] then
 		return false
 	end
