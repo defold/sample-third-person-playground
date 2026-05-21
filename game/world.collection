@@ -993,8 +993,8 @@ instances {
   }
 }
 instances {
-  id: "fuel_barell2"
-  prototype: "/assets/models/forest/gameobjects/fuel_barell.go"
+  id: "barrel2"
+  prototype: "/assets/models/forest/gameobjects/fuel_barrel.go"
   position {
     x: 561.0
     y: 75.0
@@ -1007,8 +1007,8 @@ instances {
   }
 }
 instances {
-  id: "fuel_barell1"
-  prototype: "/assets/models/forest/gameobjects/fuel_barell.go"
+  id: "barrel1"
+  prototype: "/assets/models/forest/gameobjects/fuel_barrel.go"
   position {
     x: -167.0
     y: 75.0
@@ -1279,7 +1279,7 @@ embedded_instances {
   "friction: 0.9\\n"
   "restitution: 0.5\\n"
   "group: \\\"ground\\\"\\n"
-  "mask: \\\"ball\\\"\\n"
+  "mask: \\\"movable\\\"\\n"
   "mask: \\\"player\\\"\\n"
   "mask: \\\"gold\\\"\\n"
   "embedded_collision_shape {\\n"
@@ -1381,9 +1381,9 @@ embedded_instances {
   data: ""
 }
 embedded_instances {
-  id: "other"
-  children: "fuel_barell1"
-  children: "fuel_barell2"
+  id: "barrel"
+  children: "barrel1"
+  children: "barrel2"
   data: ""
 }
 embedded_instances {
@@ -1410,7 +1410,7 @@ embedded_instances {
   "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/builtins/assets/meshes/quad.dae\\\"\\n"
+  "  data: \"mesh: \\\"/builtins/assets/gltf/quad.gltf\\\"\\n"
   "name: \\\"{{NAME}}\\\"\\n"
   "materials {\\n"
   "  name: \\\"default\\\"\\n"

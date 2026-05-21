@@ -1,4 +1,8 @@
 name: "game"
+instances {
+  id: "audio"
+  prototype: "/game/audio.go"
+}
 collection_instances {
   id: "player"
   collection: "/game/player.collection"

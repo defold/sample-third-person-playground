@@ -1,65 +1,152 @@
+-- Libraries
+local audio = require("game.audio")
+
+-- Messages
 local MSG_CONTACT_POINT_RESPONSE = hash("contact_point_response")
 local MSG_TRIGGER_RESPONSE = hash("trigger_response")
 
+-- Collision groups
+local GROUP_MOVABLE = hash("movable")
 local GROUP_GOLD = hash("gold")
 local GROUP_GOLD_TARGET = hash("gold_target")
 
+-- Minium impulse on contact to play a sound
+local MIN_CONTACT_IMPULSE = 2000
+
+-- Helper function to check if ID contains a given text
+local function id_contains(id, text)
+    return string.find(tostring(id), text, 1, true) ~= nil
+end
+
+local function stop_remove_timer(self)
+    if self.remove_timer then
+        timer.cancel(self.remove_timer)
+        self.remove_timer = nil
+    end
+end
+
+--------------------------------------------
+-- Initialization
+--------------------------------------------
+
 function init(self)
-    ---Get hand bone from a model
+    -- Get hand bone from a model
     self.url_hand = model.get_go("/player/character_model#model", "DEF-handL")
+
+    -- Get a position for releasing and dropping a gold
     self.gold_release_position = go.get_position("/world/gold_release_position")
+
+    -- Store currently held bars
     self.bars = {}
 end
 
+--------------------------------------------
+-- Collision messages handling
+--------------------------------------------
+
 function on_message(self, message_id, message, sender)
-    -- Handle collision
+    -- Handle collisions
     if message_id == MSG_CONTACT_POINT_RESPONSE then
+
+        -- Handle contact with gold bars:
         if message.other_group == GROUP_GOLD then
-            ---If we already added bar to the stack then we skip code
+
+            -- If we already added the bar to the stack then we skip code
             for key, bar in pairs(self.bars) do
                 if bar.go_id == message.other_id then
                     return
                 end
             end
-            local bar_body = msg.url(nil, message.other_id, "collisionobject")
-            ---Attach the bar to the bone
+
+            -- Attach the bar to the bone
             go.set_parent(message.other_id, self.url_hand, true)
-            ---Disable the bar body
+
+            -- Disable the bar body
+            local bar_body = msg.url(nil, message.other_id, "collisionobject")
             msg.post(bar_body, "disable")
-            ---Move the bar to a new position
+
+            -- Move the bar to a new position in the stack
             local stack_position = vmath.vector3(0, - #self.bars * 0.2, 0)
             go.animate(message.other_id, "position", go.PLAYBACK_ONCE_FORWARD, stack_position, go.EASING_OUTSINE, 0.5)
-            go.animate(message.other_id, "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(math.rad(180)),
-                go.EASING_OUTSINE, 0.5)
-            ---Collect the gold bar to a table
+
+            -- Reset the rotation
+            local base_rotation = vmath.quat_rotation_z(math.rad(180))
+            go.animate(message.other_id, "rotation", go.PLAYBACK_ONCE_FORWARD, base_rotation, go.EASING_OUTSINE, 0.5)
+
+            --- Collect the gold bar  - add it to the table
             self.bars[#self.bars + 1] = {
                 body_id = bar_body,
-                go_id = message.other_id
+                go_id = message.other_id,
+                drop_audio_id = msg.url(nil, message.other_id, "drop_audio")
             }
+
+            -- Play the sound to confirm a pick up
+            audio.play(audio.PICK_UP_ITEM)
+
+        -- If it's not a contact with gold bars, check if we collided with a movable object:
+        else
+            -- When impact is neglectible skip and play no sound 
+            if message.applied_impulse < MIN_CONTACT_IMPULSE then
+                return
+            end
+
+            -- Both ball and barrel are in one "movable" group, so we identify object by ID
+            if message.other_group == GROUP_MOVABLE then
+                if id_contains(message.other_id, "fuel_barrel") then
+                    audio.play_gated("barrel_contact", audio.BARREL_CONTACT, 0.2, 0.75)
+                else
+                    audio.play_gated("ball_contact", audio.BALL_CONTACT, 0.2, 0.75)
+                end
+            end
         end
+
+    -- Handle triggers:
     elseif message_id == MSG_TRIGGER_RESPONSE then
+
+        -- Handle dropping gold bars:
         if message.other_group == GROUP_GOLD_TARGET then
-            if message.enter and #self.bars > 0 then
-                ---Start a timer to remove gold bars
-                ---This can also be done in the update function
+
+            -- If we enter the deposit area, and we have some gold bars in hand:
+            if message.enter and #self.bars > 0 and not self.remove_timer then
+                -- We start a timer that deposits the gold bars one by one
                 self.remove_timer = timer.delay(0.3, true, function()
-                    if #self.bars > 0 then
-                        ---Remove a gold bar from the model
-                        local bar = table.remove(self.bars)
-                        go.set_parent(bar.go_id, nil, true)
-                        ---Move the gold bar to the gold release position
-                        go.animate(bar.go_id, "position", go.PLAYBACK_ONCE_FORWARD, self.gold_release_position,
-                            go.EASING_OUTSINE, 0.2, 0, function()
-                                ---Enable the body of the gold bar.
-                                go.set_position(self.gold_release_position, bar.body_id)
-                                msg.post(bar.body_id, "enable")
-                            end)
+                    if #self.bars == 0 then
+                        stop_remove_timer(self)
+                        return
+                    end
+
+                    -- Remove a gold bar from the table and detach it
+                    local bar = table.remove(self.bars)
+                    go.set_parent(bar.go_id, nil, true)
+
+                    -- Play a throw sound
+                    audio.play(audio.THROW_ITEM)
+                    audio.play(audio.POSITIVE_FEEDBACK)
+
+                    -- Move the gold bar to the gold release position
+                    go.animate(bar.go_id, "position", go.PLAYBACK_ONCE_FORWARD, self.gold_release_position, go.EASING_OUTSINE, 0.2, 0, function()
+
+                        ---Enable the physics body of the gold bar.
+                        go.set_position(self.gold_release_position, bar.body_id)
+                        msg.post(bar.body_id, "enable")
+
+                        -- After a moment play a drop sounds (estimation in order not to handle collisions of a bar with ground)
+                        timer.delay(0.6, false, function()
+                            audio.play(audio.DROP_ITEM)
+                        end)
+
+                    end)
+
+                    if #self.bars == 0 then
+                        stop_remove_timer(self)
                     end
                 end)
+
+            -- If we exit the deposit area:
             elseif self.remove_timer then
-                ---On exit cancel a timer
-                timer.cancel(self.remove_timer)
-                self.remove_timer = nil
+
+                -- Cancel a timer
+                stop_remove_timer(self)
             end
         end
     end
