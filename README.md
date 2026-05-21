@@ -1,6 +1,6 @@
 # Defold Third-Person 3D Playground
 
-It is a compact third-person game for the [Defold](https://defold.com/) game engine with:
+This is a compact third-person game sample for the [Defold](https://defold.com/) game engine with:
 - a controllable character
 - a camera that follows the character
 - 3D models with animations
@@ -43,21 +43,21 @@ Move the character with:
 - Mouse / Touch - via the on-screen virtual joystick
 
 ### Pickups
-`
+
 The character can pick up `gold bars` by walking into them. Carry the bars to the target area and they will be deposited automatically while the player remains inside the trigger zone. 
 
-There is no separate interact button. Pickup and deposit are intentionally automatic. This is a very simple and commonly used mechanics in games.
+There is no separate interact button. Pickup and deposit are intentionally automatic. This is a simple and commonly used mechanic in games.
 
-## Controls Modes
+## Control Modes
 
 The player controller supports two modes for controls through one boolean script property in
 [`game/player_controller.script`](game/player_controller.script):
 
 ```lua
-go.property("is_control_screen_fixed", true)
+go.property("is_controls_screen_fixed", true)
 ```
 
-Can be toggled in the [`game/player.script`](game/player.script) attached in the [`game/player.collection`](game/player.collection):
+The script is attached as the `player` component on `/player/character` in [`game/player.collection`](game/player.collection):
 
 <img src="doc/player.png">
 
@@ -65,11 +65,11 @@ The setting is a Defold boolean script property, so it appears as a checkbox on 
 
 ### Camera relative mode
 
-Set `is_control_screen_fixed ` to `true` - controls are fixed to the screen/camera edges. This is the default mode. Pressing right moves the character toward the right edge of the screen and rotates the visible character to face that movement direction. Pressing down moves toward the bottom of the screen. This is the control style commonly used by top-down, isometric, and fixed-camera games.
+Set `is_controls_screen_fixed` to `true` - controls are fixed to the screen/camera edges. This is the default mode. Pressing right moves the character toward the right edge of the screen and rotates the visible character to face that movement direction. Pressing down moves toward the bottom of the screen. This is the control style commonly used by top-down, isometric, and fixed-camera games.
 
 ### Character relative mode
 
-Set `is_control_screen_fixed` to `false` - controls are relative to the character's current forward direction. In this mode up/down move the character forward/backward along its current facing direction, while left/right rotate the character. This is the original tank-style third-person steering mode.
+Set `is_controls_screen_fixed` to `false` - controls are relative to the character's current forward direction. In this mode up/down move the character forward/backward along its current facing direction, while left/right rotate the character. This is the original tank-style third-person steering mode.
 
 ## How to explore the project
 
@@ -90,7 +90,7 @@ The scene is intentionally small, but it touches many parts of a 3D game develop
 - Runtime parenting, animation, timers, and physics enable/disable messages for carried items.
 - Sounds for footsteps, some collisions, gold bar pickup, throwing, and dropping.
 - A world assembled from Defold collections, imported models, and a tilemap surface.
-- A custom render script that draws the world, builds a shadow map, and applies shadow-aware materials with 3 tiers of quality.
+- A custom render script that draws the world, builds a shadow map, and applies shadow-aware materials through a quality tier system.
 
 ## Project Layout
 
@@ -102,10 +102,10 @@ The scene is intentionally small, but it touches many parts of a 3D game develop
 | [`game/player.collection`](game/player.collection) | Player hierarchy: controller scripts, dynamic collision object, camera, character model, animation target. |
 | [`game/player_controller.script`](game/player_controller.script) | Movement, steering mode selection, animation state switching, footstep playback, and force application. |
 | [`game/steering.lua`](game/steering.lua) | Stateless steering helpers shared by keyboard, gamepad, and touch/mouse control code. |
-| [`game/player_collisions.script`](game/player_collisions.script) | Gold pickup, delivery behavior, contact sounds, and pickup/delivery feedback sounds. |
-| [`game/audio.lua`](game/audio.lua) | Small sound playback helper. |
-| [`game/sounds/`](game/sounds) | Defold sound components for the OGG files in `assets/sounds/`. |
-| [`game/gold_bar_audio.script`](game/gold_bar_audio.script) | Gold bar drop sound logic triggered by post-throw physics contact. |
+| [`game/player_collisions.script`](game/player_collisions.script) | Gold pickup, delivery behavior, contact sounds, and delivery feedback sounds. |
+| [`game/audio.go`](game/audio.go) | Single `/audio` game object with the active sound components for the OGG files in `assets/sounds/`. |
+| [`game/audio.lua`](game/audio.lua) | Small sound playback helper and contact-sound gating. |
+| [`game/sounds/`](game/sounds) | Standalone sound component resources for the same sound effects; gameplay uses the embedded components in `game/audio.go`. |
 | [`game/controller.gui`](game/controller.gui) | On-screen virtual joystick GUI component. |
 | [`game/controller.gui_script`](game/controller.gui_script) | GUI script for virtual joystick. |
 | [`game/world.collection`](game/world.collection) | Level layout: ground, props, gold bars, target trigger, release marker. |
@@ -126,7 +126,7 @@ Read more details in the [Basic Building Blocks manual](https://defold.com/manua
 
 ### Input Bindings
 
-Input starts in [`input/game.input_binding`](input/game.input_binding). Multiple physical inputs
+All the bindings are defined in the [`input/game.input_binding`](input/game.input_binding). Multiple physical inputs
 can map to the same action. For example, arrow keys, WASD, and the gamepad D-pad all map to the
 same digital movement actions. The gamepad left stick uses separate analog actions so the
 controller can preserve stick strength. Supported gamepads are mapped using the built-in `default.gamepads`.
@@ -146,7 +146,7 @@ The input sources share the same sign convention: positive X means right, negati
 
 [`game/player_controller.script`](game/player_controller.script) acquires input focus in `init()` and stores per-instance state on `self`, as Defold scripts should. It keeps digital button state, analog stick state, the current movement amount, and the current facing direction.
 
-[`game/steering.lua`](game/steering.lua) converts digital buttons and analog axes into a single 2D control vector. The player controller then interprets that vector according to the `is_control_screen_fixed` boolean property:
+[`game/steering.lua`](game/steering.lua) converts digital buttons and analog axes into a single 2D control vector. The player controller then interprets that vector according to the `is_controls_screen_fixed` boolean property:
 
 - `true`: normalize the control vector, rotate it by the player collection's base yaw, and use it directly as world movement on the XZ plane. The visible character faces the resulting movement direction. This is the default screen/camera-fixed mode.
 - `false`: use the Y axis as forward/back movement and the X axis as rotation input. This makes controls relative to the character's current forward direction.
@@ -155,7 +155,7 @@ Keyboard, gamepad, and touch/mouse joystick input all go through this same path.
 
 ### Gamepad Notes
 
-Gamepad bindings are in [`input/game.input_binding`](input/game.input_binding). The sample binds:
+Gamepad bindings are also in the [`input/game.input_binding`](input/game.input_binding). The sample binds:
 
 - `GAMEPAD_LSTICK_LEFT`, `GAMEPAD_LSTICK_RIGHT`, `GAMEPAD_LSTICK_UP`, `GAMEPAD_LSTICK_DOWN` to analog movement actions.
 - `GAMEPAD_LPAD_LEFT`, `GAMEPAD_LPAD_RIGHT`, `GAMEPAD_LPAD_UP`, `GAMEPAD_LPAD_DOWN` to the same digital actions used by keyboard input.
@@ -172,7 +172,7 @@ The on-screen joystick is a GUI scene in [`game/controller.gui`](game/controller
 msg.post("game:/player/character", hash("MOVE"), { axis_x = self.direction.x * strength, axis_y = self.direction.y * strength })
 ```
 
-The player controller receives that message and merges the joystick axes with keyboard and gamepad axes before applying the selected `is_control_screen_fixed` steering mode. Releasing the joystick sends zero axes, which clears touch movement while leaving keyboard and gamepad state independent.
+The player controller receives that message and merges the joystick axes with keyboard and gamepad axes before applying the selected `is_controls_screen_fixed` steering mode. Releasing the joystick sends zero axes, which clears touch movement while leaving keyboard and gamepad state independent.
 
 See Defold's [GUI manual](https://defold.com/manuals/gui/), [GUI scripts manual](https://defold.com/manuals/gui-script/), and [message passing manual](https://defold.com/manuals/message-passing/) for the concepts behind this separation.
 
@@ -214,7 +214,7 @@ When the player collides with a gold bar, the script checks whether that bar is 
 4. Animates the bar into a small stack in the character's hand.
 5. Stores the bar ids in `self.bars`.
 
-When the player enters the target trigger and carries at least one bar, a repeating timer removes one carried bar every 0.3 seconds. Each removed bar is unparented, animated to `/world/gold_release_position`, and then its collision object is re-enabled.
+When the player enters the target trigger and carries at least one bar, a repeating timer removes one carried bar every 0.3 seconds. Each removed bar is unparented, animated to `/world/gold_release_position`, and then its collision object is re-enabled. The timer is cancelled when the player leaves the target area or when the carried stack becomes empty.
 
 Read more about [collision messages](https://defold.com/manuals/physics-messages/), [collision groups](https://defold.com/manuals/physics-groups/), [property animation](https://defold.com/manuals/property-animation/), and
 [timer callbacks](https://defold.com/ref/timer/).
@@ -226,17 +226,13 @@ Two details are worth noticing when you read the code:
 
 ## Sound
 
-Sound components live in a single game object [`game/audio.go`](game/audio.go):
-
-
-
-The gameplay scripts use those helpers directly:
+Sound components live in a single game object [`game/audio.go`](game/audio.go). The object is instanced as `/audio`, and gameplay scripts play components such as `/audio#pick_up_item` through the helper functions in [`game/audio.lua`](game/audio.lua).
 
 - Footsteps are controlled by [`game/player_controller.script`](game/player_controller.script). They are tied to the active animation state, not to raw input. `Walk_Loop` uses a slower cadence, `Jog_Fwd_Loop` uses a faster cadence, and idle stops any current footstep sound. The script stops the previous footstep before playing the next one, so running does not stack overlapping footstep voices.
-- Ball and barrel contact sounds are played from [`game/player_collisions.script`](game/player_collisions.script) when the player receives a strong enough collision impulse from objects in the `ball` collision group. Barrels are distinguished by their object id. Static environment collisions do not play sounds on collisions.
-- Gold pickup plays a pickup sound and a positive feedback sound when a bar is attached to the hand.
+- Ball and barrel contact sounds are played from [`game/player_collisions.script`](game/player_collisions.script) when the player receives a strong enough collision impulse from objects in the `movable` collision group. Barrels are distinguished by their object id. Static environment collisions do not play sounds on collisions.
+- Gold pickup plays a pickup sound when a bar is attached to the hand.
 - Depositing gold plays a throw sound and a positive feedback sound as each carried bar leaves the hand.
-- [`game/gold_bar_audio.script`](game/gold_bar_audio.script) handles the drop sound on each gold bar. The player script arms this sound after throwing the bar, and the bar plays the drop sound, when it contacts the ground, another gold bar, or static geometry.
+- A drop sound is played shortly after each deposited bar is released.
 
 ## World and Physics Setup
 
@@ -271,16 +267,15 @@ The project uses a custom render pipeline configured in [`render/custom.render`]
 
 ### Render Script Basics
 
-The render script creates predicates, and each predicate matches material tags. For example, a material tagged `model` is drawn when the render script calls `render.draw(predicates.model)`.
+The render script creates predicates, and each predicate matches material tags. For example, a material tagged `tile` is drawn when the render script calls `render.draw(predicates.tile)`.
 
 This sample creates these main render predicates in `render/custom.render_script`:
 
-- `model` for regular 3D models.
 - `tile` for tilemaps and other tile-tagged content.
 - `particle` for particle effects.
 - `gui` and `debug_text` for screen-space UI/debug output.
 
-The shadow module creates additional predicates:
+The shadow module creates the model-related predicates:
 
 - `shadow_surface` for the large transparent receiver plane over the ground.
 - `shadow_model` for static non-skinned models.
@@ -297,29 +292,36 @@ The frame update order in `render/custom.render_script` is:
 1. Reset color/depth render state with `shadow_mapping.prerender()`.
 2. Clear color, depth, and stencil buffers.
 3. Select the active camera component and set the viewport.
-4. Draw regular `model` content with depth testing and face culling.
-5. Draw `tile` and `particle` content.
-6. Call `shadow_mapping.render_shadow(self)` to render a light-space depth texture.
-7. Call `shadow_mapping.render_shadow_model(...)` to redraw shadow-aware surfaces and models using the shadow texture and light constants.
-8. Draw debug 3D lines/text.
-9. Reset the world camera and draw GUI/debug text in screen space.
+4. Draw `tile` and `particle` content.
+5. Call `shadow_mapping.render_shadow()` to render a light-space depth texture, unless the active tier ignores shadows. The ground receiver is not rendered into this depth texture.
+6. Call `shadow_mapping.render_shadow_model(...)` to draw models, and for non-low tiers the transparent shadow receiver, using the active shadow texture and light constants.
+7. Draw debug 3D lines/text.
+8. Reset the world camera and draw GUI/debug text in screen space.
 
-That means the shadow-aware materials are drawn as a second shadow pass after the base world pass. This is easy to follow in a sample project, and it keeps the shadow code localized inside the `shadow_mapping` module and the shadow-specific materials.
+That keeps model rendering localized inside the `shadow_mapping` module and the shadow-specific materials. The regular render script handles screen/world setup, tilemaps, particles, debug drawing, and GUI.
 
 ### Shadows
 
 Shadow mapping is based on a simple two-step technique:
 
 1. Render the scene from the directional light's point of view into a depth texture.
-2. Render the scene from the camera's point of view and compare each fragment against the previously rendered light-space depth texture. If the fragment is farther away than the stored depth, it is in shadow.
+2. Render the scene from the camera's point of view and compare each fragment against the light-space depth texture from the shadow pass. If the fragment is farther away than the stored depth, it is in shadow.
 
-In this project, [`shadow_mapping/shadow_mapping.lua`](shadow_mapping/shadow_mapping.lua) owns the shadow render target and the light matrices. It creates a render target named `shadow_buffer` with depth buffer. The shadow system uses render resources declared in `render/custom.render` so the render script can enable shadow materials by name.
+In this project, [`shadow_mapping/shadow_mapping.lua`](shadow_mapping/shadow_mapping.lua) owns the active shadow render target and the light matrices. It keeps at most one shadow render target alive at a time:
 
-The default size of the shadow map is 2048x2048 and this size is one of the most important factors for quality vs performance, so adjust it to your needs in [`shadow_mapping/shadow_mapping.lua`](shadow_mapping/shadow_mapping.lua) here:
+- high tier uses `shadow_buffer_high` at 2048x2048.
+- mid tier uses `shadow_buffer_mid` at 1024x1024.
+- low tier uses no shadow render target.
+
+The active render target is created for the current tier when shadows are needed. If the tier changes to a different shadow-map size, the previous render target is deleted before the new one is created. If the active tier is low, any existing shadow render target is deleted and the shadow pass is skipped. The shadow system uses render resources declared in `render/custom.render` so the render script can enable shadow materials by name.
+
+The shadow map size is one of the most important factors for quality, but higher size affects performance. Adjust the tier sizes in [`shadow_mapping/shadow_mapping.lua`](shadow_mapping/shadow_mapping.lua) here:
 
 ```lua
-local BUFFER_WIDTH = 2048
-local BUFFER_HEIGHT = 2048
+local HIGH_BUFFER_WIDTH = 2048
+local HIGH_BUFFER_HEIGHT = 2048
+local MID_BUFFER_WIDTH = HIGH_BUFFER_WIDTH / 2
+local MID_BUFFER_HEIGHT = HIGH_BUFFER_HEIGHT / 2
 ```
 
 [`game/shadows.script`](game/shadows.script) configures the light:
@@ -328,33 +330,35 @@ local BUFFER_HEIGHT = 2048
 - A position and rotation define the direction from which the shadow map is rendered.
 - `shadow_mapping.calculate_light_transform()` converts that into a view matrix.
 
-During the shadow pass, `shadow_mapping.render_shadow()` switches the render target to `shadow_buffer`, uses the light projection and light view, enables a tier-specific `shadow` material, and draws `shadow_surface`, `shadow_model`, and `shadow_model_skinned`.
+During the shadow pass, `shadow_mapping.render_shadow()` switches to the active shadow render target, clears the encoded depth color to `1.0`, uses the light projection and light view, enables a tier-specific `shadow` material, and draws `shadow_model` and `shadow_model_skinned`. The floor receiver is not drawn into the shadow map, so it never casts a shadow. Mid tier renders this shadow map every frame at 1024x1024.
 
-During the visible shadow pass, `shadow_mapping.render_shadow_model()` builds:
+During the visible shadow pass, `shadow_mapping.render_shadow_model()` uses two light constants:
 
 - `mtx_light` - a bias-projection-view matrix that transforms world positions into shadow texture
   coordinates.
-- `light` - a vector consumed by the diffuse shaders for directional lighting.
+- `light` - a vector used by the diffuse shaders for directional lighting.
 
-Those values are written into a render constant buffer and passed when drawing the shadow-aware predicates. The vertex shaders, such as [`shadow_mapping/materials/standard_instanced.vp`](shadow_mapping/materials/standard_instanced.vp), calculate `var_texcoord0_shadow = mtx_light * world_position`. The fragment shaders, such as [`shadow_mapping/materials/high/diffuse.fp`](shadow_mapping/materials/high/diffuse.fp), divide by `w`, sample `tex_depth`, and darken the shaded color when the depth comparison says the fragment is occluded from the light.
+The light source is static in this sample, so these values are cached in [`shadow_mapping/shadow_mapping.lua`](shadow_mapping/shadow_mapping.lua). They are recalculated only when the light transform or projection changes, then written into a render constant buffer and passed when drawing the shadow-aware predicates. This avoids repeated matrix multiplication and inverse-matrix work in the render update. The vertex shaders, such as [`shadow_mapping/materials/standard_instanced.vp`](shadow_mapping/materials/standard_instanced.vp), calculate `var_texcoord0_shadow = mtx_light * world_position`. The fragment shaders, such as [`shadow_mapping/materials/high/diffuse.fp`](shadow_mapping/materials/high/diffuse.fp), divide by `w`, sample `tex_depth`, and darken the shaded color when the depth comparison says the fragment is occluded from the light.
 
-The ground itself is a bit of a nuance. The visible ground is a tilemap, but the receiver for model shadows is the child object `surface_shadow` in [`game/world.collection`](game/world.collection). It is a large quad using `diffuse_transparent.material` and the `shadow_surface` tag. This model is not casting any shadows, only receives them.
+The ground itself is a bit of a nuance. The visible ground is a tilemap, but the receiver for model shadows is the child object `surface_shadow` in [`game/world.collection`](game/world.collection). It is a large quad using `diffuse_transparent.material` and the `shadow_surface` tag. It is drawn as a transparent receiver in the visible model pass for mid and high tiers only. Low tier skips this receiver.
 
-The animated character uses a skinned material and a skinned vertex shader, while props use non-skinned model materials.
+The animated character uses a skinned material and a skinned vertex shader, while props use non-skinned model materials. In mid tier, skinned models use a separate diffuse-only mid material in the visible pass, while static models and the transparent receiver sample the mid shadow map.
 
 ### Quality Tiers
 
-The visible 3D objects use materials under [`shadow_mapping/materials/`](shadow_mapping/materials). There are low, mid, and high variants:
+The visible 3D objects use materials under [`shadow_mapping/materials/`](shadow_mapping/materials). There are low, mid, and high material variants:
 
 | Tier | Screenshot | Description |
 |---|---|---|
-| `Low` | <img src="doc/shadow_low.png"> | use simple diffuse lighting only and skip shadow sampling. |
-| `Mid` | <img src="doc/shadow_mid.png"> | sample the shadow map with a cheaper single-sample calculation. |
-| `High` | <img src="doc/shadow_high.png"> | use a small 3x3 percentage-closer filtering pattern for softer shadows. |
+| `Low` | <img src="doc/shadow_low.png"> | use simple diffuse lighting only, skip shadow sampling, skip the shadow pass, and do not draw the transparent shadow receiver. |
+| `Mid` | <img src="doc/shadow_mid.png"> | use a 1024x1024 shadow map. Static models and the transparent receiver sample it with a cheaper single-sample calculation. Skinned models use a diffuse-only mid material in the visible pass. |
+| `High` | <img src="doc/shadow_high.png"> | use a 2048x2048 shadow map and a small 3x3 percentage-closer filtering pattern for softer shadows. |
 
-[`shadow_mapping/tier_service.script`](shadow_mapping/tier_service.script) samples frame time shortly after startup. If the average frame time is too high, it lowers the tier. The active tier is stored in [`shadow_mapping/tiers.lua`](shadow_mapping/tiers.lua). Individual model objects register through [`shadow_mapping/model_tiers.script`](shadow_mapping/model_tiers.script), and when the tier changes the script swaps the component's `material` property to the matching low, mid, or high material.
+[`shadow_mapping/tier_service.script`](shadow_mapping/tier_service.script) owns the list of tiers the sample is allowed to choose from. In the current project state, that list contains `tiers.LOW`, `tiers.MID`, and `tiers.HIGH`. The service starts from the highest enabled tier, samples frame time, and steps down when the average frame time is above the configured threshold.
 
-The low tier intentionally ignores shadows through `tiers.is_shadows_ignored()`. This keeps low-end devices from spending time rendering and sampling the shadow map.
+The active tier is stored in [`shadow_mapping/tiers.lua`](shadow_mapping/tiers.lua). Individual model objects register through [`shadow_mapping/model_tiers.script`](shadow_mapping/model_tiers.script), and when the tier changes the script swaps the component's `material` property to the matching low, mid, or high material.
+
+The low tier intentionally ignores shadows through `tiers.is_shadows_ignored()`. This keeps low-end devices from spending time rendering the shadow map, sampling it, drawing the transparent receiver surface, or keeping a shadow render target allocated.
 
 This is a practical pattern, commonly used in games - keep the gameplay objects the same, but swap materials based on the hardware or runtime performance.
 
