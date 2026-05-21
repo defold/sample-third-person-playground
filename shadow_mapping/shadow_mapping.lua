@@ -1,12 +1,12 @@
 local M = {}
 local tiers = require("shadow_mapping.tiers")
 
-local BUFFER_WIDTH = 2048
-local BUFFER_HEIGHT = 2048
-local BUFFER_NAME = "shadow_buffer"
+local HIGH_BUFFER_WIDTH = 2048
+local HIGH_BUFFER_HEIGHT = 2048
+local MID_BUFFER_WIDTH = HIGH_BUFFER_WIDTH / 2
+local MID_BUFFER_HEIGHT = HIGH_BUFFER_HEIGHT / 2
 
 local SHADOW_MATERIAL_NAME = "shadow"
-local SHADOW_PREDICATE_NAME = "shadow"
 local MODEL_PREDICATE_NAME = "shadow_model"
 local SHADOW_SURFACE_PREDICATE_NAME = "shadow_surface"
 local MODEL_PREDICATE_SKINNED_NAME = "shadow_model_skinned"
@@ -21,7 +21,7 @@ local function calculate_view(position, rotation)
     return matrix
 end
 
-local function create_depth_buffer(w, h)
+local function create_depth_buffer(name, w, h)
     local color_params = {
         format = render.FORMAT_RGBA,
         width = w,
@@ -42,27 +42,82 @@ local function create_depth_buffer(w, h)
         v_wrap = render.WRAP_CLAMP_TO_EDGE
     }
 
-    return render.render_target(BUFFER_NAME,
+    return render.render_target(name,
         {
             [render.BUFFER_COLOR_BIT] = color_params,
             [render.BUFFER_DEPTH_BIT] = depth_params
         })
 end
 
+local function release_light_buffer()
+    if M.light_buffer then
+        render.delete_render_target(M.light_buffer)
+        M.light_buffer = nil
+        M.light_buffer_name = nil
+    end
+end
+
+local function get_light_buffer_properties()
+    if tiers.is_mid_tier() then
+        return "shadow_buffer_mid", MID_BUFFER_WIDTH, MID_BUFFER_HEIGHT
+    end
+    return "shadow_buffer_high", HIGH_BUFFER_WIDTH, HIGH_BUFFER_HEIGHT
+end
+
+local function get_light_buffer()
+    if tiers.is_shadows_ignored() then
+        release_light_buffer()
+        return nil
+    end
+
+    local name, width, height = get_light_buffer_properties()
+    if M.light_buffer and M.light_buffer_name == name then
+        return M.light_buffer
+    end
+
+    release_light_buffer()
+    M.light_buffer = create_depth_buffer(name, width, height)
+    M.light_buffer_name = name
+    return M.light_buffer
+end
+
+local function set_light_constants_dirty()
+    M.light_constants_dirty = true
+end
+
+local function update_light_constants()
+    if not M.light_constants_dirty then
+        return
+    end
+
+    M.mtx_light = M.bias_matrix * M.light_projection * M.light_transform
+    local inv_light = vmath.inv(M.light_transform)
+    local light = M.light_position
+
+    light.x = inv_light.m03
+    light.y = inv_light.m13
+    light.z = inv_light.m23
+    light.w = 1
+
+    M.light_constants_dirty = false
+end
+
 function M.init()
-    M.shadow_pred = render.predicate({ SHADOW_PREDICATE_NAME })
     M.shadow_surface_pred = render.predicate({ SHADOW_SURFACE_PREDICATE_NAME })
     M.shadow_model_pred = render.predicate({ MODEL_PREDICATE_NAME })
     M.shadow_model_skinned_pred = render.predicate({ MODEL_PREDICATE_SKINNED_NAME })
 
-    M.light_buffer = create_depth_buffer(BUFFER_WIDTH, BUFFER_HEIGHT)
+    M.light_buffer = nil
+    M.light_buffer_name = nil
     M.light_transform = vmath.matrix4()
     M.light_projection = vmath.matrix4()
     M.light_constant_buffer = render.constant_buffer()
+    M.mtx_light = vmath.matrix4()
     M.light_position = vmath.vector4()
+    M.light_constants_dirty = true
     M.shadow_target_options = { transient = { render.BUFFER_DEPTH_BIT } }
     M.shadow_clear_buffers = {
-        [render.BUFFER_COLOR_BIT] = vmath.vector4(0, 0, 0, 1),
+        [render.BUFFER_COLOR_BIT] = vmath.vector4(1, 1, 1, 1),
         [render.BUFFER_DEPTH_BIT] = 1
     }
     M.shadow_draw_options = { constants = M.light_constant_buffer }
@@ -76,10 +131,12 @@ end
 
 function M.set_light_transform(light_transform)
     M.light_transform = vmath.matrix4(light_transform)
+    set_light_constants_dirty()
 end
 
 function M.set_light_projection(projection)
     M.light_projection = vmath.matrix4(projection)
+    set_light_constants_dirty()
 end
 
 ---@param position vector3
@@ -87,26 +144,17 @@ end
 function M.calculate_light_transform(position, rotation)
     local view = calculate_view(position, rotation)
     M.light_transform = view
+    set_light_constants_dirty()
 end
 
-local render_shadow_counter = 0
-
 function M.render_shadow()
-    if tiers.is_shadows_ignored() then
+    local light_buffer = get_light_buffer()
+    if not light_buffer then
         return
     end
 
-    if not tiers.is_top_tier() then
-        -- redraw shadows every second frame
-        render_shadow_counter = render_shadow_counter + 1
-        if render_shadow_counter == 2 then
-            render_shadow_counter = 0
-            return
-        end
-    end
-
-    local w = render.get_render_target_width(M.light_buffer, render.BUFFER_DEPTH_BIT)
-    local h = render.get_render_target_height(M.light_buffer, render.BUFFER_DEPTH_BIT)
+    local w = render.get_render_target_width(light_buffer, render.BUFFER_DEPTH_BIT)
+    local h = render.get_render_target_height(light_buffer, render.BUFFER_DEPTH_BIT)
 
     render.set_projection(M.light_projection)
     render.set_view(M.light_transform)
@@ -123,10 +171,9 @@ function M.render_shadow()
     -- render.set_cull_face(render.FACE_FRONT)
     -- render.enable_state(render.STATE_CULL_FACE)
 
-    render.set_render_target(M.light_buffer, M.shadow_target_options)
+    render.set_render_target(light_buffer, M.shadow_target_options)
     render.clear(M.shadow_clear_buffers)
     render.enable_material(tiers.get_tier_for_material(SHADOW_MATERIAL_NAME))
-    render.draw(M.shadow_surface_pred)
     render.draw(M.shadow_model_pred)
     render.draw(M.shadow_model_skinned_pred)
 
@@ -140,17 +187,12 @@ function M.prerender()
 end
 
 function M.render_shadow_model(view, proj, frustum)
-    local mtx_light = M.bias_matrix * M.light_projection * M.light_transform
-    local inv_light = vmath.inv(M.light_transform)
-    local light = M.light_position
+    local light_buffer = get_light_buffer()
+    local shadows_enabled = light_buffer ~= nil
 
-    light.x = inv_light.m03
-    light.y = inv_light.m13
-    light.z = inv_light.m23
-    light.w = 1
-
-    M.light_constant_buffer.mtx_light = mtx_light
-    M.light_constant_buffer.light = light
+    update_light_constants()
+    M.light_constant_buffer.mtx_light = M.mtx_light
+    M.light_constant_buffer.light = M.light_position
 
     render.set_projection(proj)
     render.enable_state(render.STATE_DEPTH_TEST)
@@ -160,16 +202,18 @@ function M.render_shadow_model(view, proj, frustum)
 
     render.set_view(view)
     render.set_depth_mask(true)
-    if not tiers.is_shadows_ignored() then
-        render.enable_texture(1, M.light_buffer, render.BUFFER_COLOR_BIT)
+    if shadows_enabled then
+        render.enable_texture(1, light_buffer, render.BUFFER_COLOR_BIT)
     end
     local shadow_options = M.shadow_draw_options
     shadow_options.frustum = frustum
 
     -- The shadow receiver is transparent and must stay before opaque models so it does not darken actors.
-    render.enable_state(render.STATE_BLEND)
-    render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
-    render.draw(M.shadow_surface_pred, shadow_options)
+    if shadows_enabled then
+        render.enable_state(render.STATE_BLEND)
+        render.set_blend_func(render.BLEND_SRC_ALPHA, render.BLEND_ONE_MINUS_SRC_ALPHA)
+        render.draw(M.shadow_surface_pred, shadow_options)
+    end
 
     -- Current model textures are fully opaque; disabling blend avoids unnecessary blend work.
     render.disable_state(render.STATE_BLEND)
@@ -177,7 +221,7 @@ function M.render_shadow_model(view, proj, frustum)
     if not tiers.is_mid_tier() then
         render.draw(M.shadow_model_skinned_pred, shadow_options)
     end
-    if not tiers.is_shadows_ignored() then
+    if shadows_enabled then
         render.disable_texture(1)
     end
     if tiers.is_mid_tier() then

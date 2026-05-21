@@ -9,9 +9,6 @@ in highp vec4 var_light;
 out vec4 out_fragColor;
 
 uniform highp sampler2D tex0;
-uniform highp sampler2D tex_depth;
-
-#include "/shadow_mapping/materials/mid/shadows_mid.glsl"
 
 void main()
 {
@@ -23,9 +20,6 @@ void main()
     diff_light         = max(dot(var_normal,diff_light), 0.0) + ambient_light;
     diff_light         = clamp(diff_light, 0.6, 1.0);
 
-    vec4 depth_proj    = var_texcoord0_shadow / var_texcoord0_shadow.w;
-    float shadow_value = shadow_calculation(depth_proj.xyz);
     vec3 color_out     = color.rgb * diff_light;
-    color_out          = mix(color_out * 0.75, color_out, shadow_value);
     out_fragColor      = vec4(color_out,1.0) * color.w;
 }
